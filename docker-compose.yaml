@@ -1,0 +1,6 @@
+# the compose file to deploy the services
+services:
+   server:
+
+   client:
+
