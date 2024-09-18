@@ -25,7 +25,7 @@ app.use(cors());
 
 app.get("/", async (req, res) => {
   res.status(200).json({
-    "Hello there": "Welcome to the ihub api",
+    "Hello there": "Welcome to the ihub api (staging)",
   });
 });
 
