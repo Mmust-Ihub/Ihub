@@ -1,16 +1,19 @@
 services:
-  server:
+  backend:
     build:
-      context: ./server
+      context: ./backend
       dockerfile: Dockerfile
+      target: production
     restart: unless-stopped
-    image: server
-    container_name: mern-server-cont
+    image: backend
+    container_name: backend-cont
     env_file:
-      - path: ./server/.env.prod
+      - path: ./backend/.env.prod
         required: true
+    expose:
+      - 3000
     ports:
-      - "${SERVERPORT}:${SERVERPORT}"
+      - "3000:3000"
     environment:
       mongoDbUrl: mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@mongodb:27017
       mongoDbName: Shortify
@@ -22,12 +25,12 @@ services:
     stdin_open: true
     tty: true
 
-  client:
+  frontend:
     build:
-      context: ./client
-      dockerfile: Dockerfile
-    image: client
-    container_name: mern-client-cont
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    image: frontend
+    container_name: frontend-cont
     restart: always
     ports:
       - "80:80"
@@ -36,12 +39,12 @@ services:
 
     depends_on:
       - mongodb
-      - server
+      - backend
     stdin_open: true
     tty: true
 
   mongodb:
-    restart: unless-stopped
+    restart: always
     image: mongo
     container_name: mongo-cont
     ports:
@@ -68,14 +71,15 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGODB_USER}
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_PASSWORD}
       ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_backend: mongodb
     depends_on:
       - mongodb
     stdin_open: true
     tty: true
 
 volumes:
-  shortify-data: {}
+  shortify-data:
+    driver: local
 
 networks:
   shortify:
