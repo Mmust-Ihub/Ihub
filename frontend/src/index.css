@@ -1,0 +1,126 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* color-scheme: light dark; */
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #fff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 600;
+  color: black;
+  transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-decoration: inherit;
+}
+.sidebarlinkactive {
+  color: white;
+  border-bottom: 2px solid white;
+}
+ul li a:hover,
+ul li a:active,
+.activeLink {
+  color: #02ccfe;
+  border-bottom: 2px solid #02ccfe;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (min-width: 2560px) {
+  .xll\:h-\[530px\] {
+    height: 530px;
+  }
+}
+
+.membershipbg {
+  background-image: url("./assets/webp/Mantle2.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.contactbg {
+  background-image: linear-gradient(
+      rgba(2, 204, 254, 0.62),
+      rgba(2, 204, 254, 0.62)
+    ),
+    url("./assets/contact/rectangle.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.communitybg {
+  background-image: linear-gradient(
+      rgba(2, 204, 254, 0.62),
+      rgba(2, 204, 254, 0.62)
+    ),
+    url("./assets/communityandevent/comm.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bg {
+   background: url("./assets/webp/footer.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.list {
+  list-style-type: disk;
+  list-style-image: url("./assets/webp/Vector.webp");
+  list-style-position: inside;
+}
+.aboutbg {
+  background: url("./assets/about/mantle3.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+
+.herobg {
+  background: url("./assets/webp/Mantle1.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}  
+
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbary-button {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  height: 10px;
+  background: rgba(2, 204, 254, 0.7);
+}
+#02ccfe,
+#0fa958 ::-webkit-scrollbar-track {
+  background: #aaa;
+}
