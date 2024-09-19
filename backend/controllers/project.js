@@ -75,7 +75,7 @@ exports.getProjectByGatgory = async (req, res, next) => {
     const projects = await projectsModel
       .find({ category: category })
       .skip(page * perPage)
-      .limit(page)
+      .limit(perPage)
       .sort({ createdAt: -1 });
     res.status(200).json(projects);
   } catch (error) {
@@ -93,7 +93,7 @@ exports.deleteProject = async (req, res, next) => {
     if (String(project.createdBy) !== req.payload.aud) {
       throw createError.Unauthorized(" You are not allowed to delete this project ");
     }
-    await userModel.findOneAndDelete({_id: id})
+    await projectsModel.findOneAndDelete({_id: id})
     return res.status(200).json({"status": "success", "message": "blog deleted successfully ..."})
   } catch (error) {
     next(error);
