@@ -6,7 +6,7 @@
 
 **Things to take note of**
 
-#### dev_base_url: https://ihub-backend-seven.vercel.app
+#### dev_base_url: https://ihub-mu.vercel.app/
 
 #### prod_base_url: "http://localhost:3000"
 
@@ -195,8 +195,98 @@
    "success": "password set successfully",
 ```
 
-# PROJECTS
+# Testimonials
 
+## create testimonial
+
+> **request**
+
+- **_url_**: `{{dev_base_url}}/api/v1/testimonials`
+- **_method:_** `POST`
+
+- **_Headers:_**
+
+  - `Content-Type: multipart/form-data `
+
+- **_request body_**:
+  ```json
+  "name": "name of th client",
+  "occupation": "client's occupation",
+  "message": "what the client has to say",
+  "rating": "user rating 0-5",
+  "image": "client's images"
+  ```
+  > **Response**
+- status code: `201`
+- response body:
+  ```json
+  "name": "name of th client",
+  "occupation": "client's occupation",
+  "message": "what the client has to say",
+  "rating": "user rating 0-5",
+  "image": "https://res.cloudinary.com/dlio7cpjo/image/upload/v1725631396/mmust-ihub/xxyf52f4xx98eaz7vhae.png"
+  ```
+
+## Get testimonials (with pagination features)
+
+> **request**
+
+- **_url_**: `{{dev_base_url}}/api/v1/testimonials`
+- **_method:_** `GET`
+
+- **_Headers:_**
+
+  - `Content-Type: application/json`
+
+- **_Optional query parameters:_**
+
+| Parameter |  Type   | Default |
+| :-------: | :-----: | :-----: |
+|   page    | integer |    0    |
+|  perPage  | integer |    5    |
+
+> **Response**
+
+- status code: `200`
+- response body:
+  ```json
+  [
+    {
+      "_id": "66eb85ec981c8520150c0b62",
+      "name": "Ralph Emmerich",
+      "occupation": "Forward Integration Developer",
+      "message": "Et deserunt voluptas temporibus nam ut.",
+      "rating": 3,
+      "imageUrl": "https://res.cloudinary.com/dlio7cpjo/image/upload/v1726711275/mmust-ihub/eajf6foc6ki5vimj6oqx.png",
+      "createdAt": "2024-09-19T02:01:16.264Z",
+    }
+  ]
+  ```
+
+## Delete Testimonial
+
+> **request**
+
+- **_url_**: `{{dev_base_url}}/api/v1/testimonials/{_id}`
+- **_method:_** `Delete`
+
+- **_Headers:_**
+
+  - `Content-Type: application/json`
+  - `Authorization: Bearer <token>`
+
+> **Response**
+
+- status code: `200`
+- response body:
+  ```json
+  {
+    "status": "success",
+    "message": "testimonial deleted successfully ..."
+  }
+  ```
+
+# PROJECTS
 ## create project
 
 > **request**
@@ -360,7 +450,7 @@
 
   - `Content-Type: application/json`
 
-- **_Body:_**
+- **_request Body:_**
   ```json
   {
     "email": "email of the donor",
@@ -379,9 +469,12 @@
     "checkoutRequestId": "ws_CO_10092024194005201743596183"
   }
   ```
+
 ### Check on the transaction status.
+
 > This requires you to poll this endpoint at a certain interval to check the status of the transaction.
-- The possible statuses are failed, success, pending
+
+- Possible statuses are failed, success, pending
 - One you get the failed status, it means the user cancelled the transaction hence your program should stop the poll.
 
 > **request**
@@ -402,7 +495,6 @@
     "status": "success"
   }
   ```
-
 
  <h2>2. Mastercard payment </h2>
 
