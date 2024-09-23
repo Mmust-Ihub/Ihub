@@ -8,6 +8,7 @@ import Donate from "./pages/DonatePage";
 import CommunityAndEvents from "./pages/CommunityAndEvents";
 import NotFoundPage from "./pages/NotFoundPage";
 import Contact from "./pages/Contact";
+import AdminHome from "./pages/AdminHome";
 function App() {
   return (
     <Router>
@@ -20,6 +21,7 @@ function App() {
         <Route path="/donate" element={<Donate />} />
         <Route path="/communityandevents" element={<CommunityAndEvents />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/Home" element={<AdminHome />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
