@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Marquee from "react-fast-marquee";
 
 
 function Testimonials() {
+  const [loading, setLoading] = useState(false);
   var settings = {
     dots: true,
     arrows: false,
@@ -13,12 +13,12 @@ function Testimonials() {
     speed: 5000,
     slidesToShow: 2,
     slidesToScroll: 1,
-    autoplay: true,
     autoPlaySpeed: 0,
     focusOnSelect: true,
     cssEase: "linear",
     pauseOnHover: true,
     pauseOnFocus: true,
+    autoplay: true,
 
     responsive: [
       {
@@ -48,6 +48,7 @@ function Testimonials() {
   };
   const [testimonials, setTestimonials] = useState([]);
   const FetchTestimonials = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         "https://ihub-mu.vercel.app/api/v1/testimonials",
@@ -60,6 +61,9 @@ function Testimonials() {
       
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
+      console.log("Testimonials fetched successfully");
     }
   };
   const [readMore, setReadMore] = useState(0);
@@ -73,52 +77,42 @@ function Testimonials() {
         Testimonials
       </h2>
 
-      <Slider {...settings}>
-        {testimonials?.map((testimonial, index) => (
-          <div
-            key={index}
-            className="shadow-3xl shadow-black justify-center items-center flex text-black p-1"
-          >
-            <div className="bg-white px-6 py-4 rounded-2xl flex flex-row items-start justify-start space-x-4 mx-2">
-              <div className="w-[200px]">
-                <img
-                  src={testimonial.imageUrl}
-                  alt="person image"
-                  className=" rounded-full object-cover w-[150px]"
-                />
-              </div>
-              <div>
-                <span className="w-full text-black  font-semibold">
-                  {testimonial.name}
-                </span>
-                <span className="font-semibold w-full italic text-black ">
-                  , {testimonial.occupation}
-                </span>
-                <p>{readMore !== index ? testimonial.message.slice(0, 200) + "...": testimonial.message}</p>
-                <div className="w-full flex justify-end mt-1">
-                  {
-                    readMore !== index ? (
-                      <button
-                        onClick={() => setReadMore(index)}
-                        className="text-primary font-semibold"
-                      >
-                        Read More
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => setReadMore(-1)}
-                        className="text-primary font-semibold"
-                      >
-                        show Less
-                      </button>
-                    )
-                  }
+      {loading ? (
+        <div className="flex flex-col justify-center items-center">
+          <img src={"/loading.gif"} alt="loading" className="w-24 h-24" />
+          <p className="w-full text-center text-primary text-xl">
+            Loading testimonials...
+          </p>
+        </div>
+      ) : (
+        <Slider {...settings}>
+          {testimonials?.map((testimonial, index) => (
+            <div
+              key={index}
+              className="shadow-3xl shadow-black overflow-ellipsis justify-center items-center flex text-black p-1"
+            >
+              <div className="bg-white   h-[200px] px-6 py-4 rounded-2xl flex flex-row items-start justify-start space-x-4 mx-2">
+                <div className="w-[200px]">
+                  <img
+                    src={testimonial.imageUrl}
+                    alt="person image"
+                    className=" rounded-full object-cover w-[70px]"
+                  />
+                </div>
+                <div>
+                  <span className="w-full text-black  font-semibold">
+                    {testimonial.name}
+                  </span>
+                  <span className="font-semibold w-full italic text-black ">
+                    , {testimonial.occupation}
+                  </span>
+                  <p className="p-2 ">{testimonial.message}</p>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </Slider>
+          ))}
+        </Slider>
+      )}
     </div>
   );
 }

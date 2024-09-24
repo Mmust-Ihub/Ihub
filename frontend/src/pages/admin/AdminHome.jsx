@@ -30,6 +30,7 @@ import { useState } from "react";
               for (const key in formData) {
                     data.append(key, formData[key]);
               }
+             console.log(data)
 
               try {
                     const response = await fetch(
