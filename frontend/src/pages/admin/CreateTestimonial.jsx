@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-    function AdminHome() {
+function CreateTestimonial() {
+      
          const [formData, setFormData] = useState({
               name: '',
               occupation: '',
@@ -40,8 +41,7 @@ import { useState } from "react";
                         body: data,
                         headers: {
                           Accept: "application/json",
-                          Authorization:
-                            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pY2hhZWxtYWluYTI4NDlAZ21haWwuY29tIiwiaWF0IjoxNzI3MDcwOTE5LCJleHAiOjE3Mjc2NzU3MTksImF1ZCI6IjY2ZjEwMjkyYzVlOWNhNzg3ZDIyZGU4MiIsImlzcyI6ImFwcGxpY2F0aW9uIn0.X9z1NB8N2_KXv5KWs8g_4hOB2VAt6qboNi01hgy9L08",
+                          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                         },
                       }
                     );
@@ -54,7 +54,7 @@ import { useState } from "react";
 
         return (
           <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Admin Home</h1>
+            <h1 className="text-2xl font-bold mb-4">Create testimonial</h1>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
@@ -79,8 +79,7 @@ import { useState } from "react";
                   value={formData.occupation}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"CreateTestimonial/>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">
@@ -132,4 +131,4 @@ import { useState } from "react";
         );
     }
 
-export default AdminHome;
+export default CreateTestimonial;

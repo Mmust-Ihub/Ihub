@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const ProjectPage = () => {
+const CreateProject = () => {
   const [project, setProject] = useState({
     title: "",
     headline: "",
@@ -8,6 +10,7 @@ const ProjectPage = () => {
     category: "",
     image: null,
   });
+  const [loading, setLoading] = useState(false); // Loading state
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,36 +30,47 @@ const ProjectPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true); // Set loading to true
+    toast.info("Creating project...");
+
     const formData = new FormData();
     formData.append("title", project.title);
     formData.append("headline", project.headline);
     formData.append("description", project.description);
     formData.append("category", project.category);
     formData.append("image", project.image);
-    console.log(project.image)
 
     try {
-      const response = await fetch("https://ihub-mu.vercel.app/api/v1/projects", {
-        method: "POST",
-        body: formData,
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pY2hhZWxtYWluYTI4NDlAZ21haWwuY29tIiwiaWF0IjoxNzI3MDcwOTE5LCJleHAiOjE3Mjc2NzU3MTksImF1ZCI6IjY2ZjEwMjkyYzVlOWNhNzg3ZDIyZGU4MiIsImlzcyI6ImFwcGxpY2F0aW9uIn0.X9z1NB8N2_KXv5KWs8g_4hOB2VAt6qboNi01hgy9L08`,
-        },
-      });
+      const response = await fetch(
+        "https://ihub-mu.vercel.app/api/v1/projects",
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
 
       const result = await response.json();
+      toast.success("Project created successfully!");
       console.log(result);
+      window.location.href = "/projects";
     } catch (error) {
+      toast.error("There was a problem with the submission.");
       console.error("There was a problem with the fetch operation:", error);
+    } finally {
+      setLoading(false); // Set loading back to false
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <ToastContainer />
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
         <h2 className="text-2xl font-bold mb-6 text-center">Create Project</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -92,7 +106,6 @@ const ProjectPage = () => {
             />
           </div>
 
-          {/* Description */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Description
@@ -146,10 +159,13 @@ const ProjectPage = () => {
 
           {/* Submit Button */}
           <div>
-            <button onClick={handleSubmit}
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            <button
+              disabled={loading} // Disable the button when loading
+              className={`w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                loading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             >
-              Create Project
+              {loading ? "Creating..." : "Create Project"}
             </button>
           </div>
         </form>
@@ -158,4 +174,4 @@ const ProjectPage = () => {
   );
 };
 
-export default ProjectPage;
+export default CreateProject;

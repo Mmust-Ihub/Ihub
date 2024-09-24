@@ -10,10 +10,7 @@ const useAuthToken = () => {
     const token = localStorage.getItem("authToken");
     return { token, setAuthToken };
   };
-  const removeItem = () => {
-    localStorage.removeItem("savedQuestions");
-    localStorage.removeItem("templateId");
-  };
+  
   // Function to update the authentication token
   const updateAuthToken = (newToken) => {
     
@@ -32,7 +29,7 @@ const useAuthToken = () => {
   };
 
   // Return the token and functions to update and clear it
-  return { updateAuthToken, clearAuthToken, getItem, removeItem };
+  return { updateAuthToken, clearAuthToken, getItem};
 };
 
 export default useAuthToken;
