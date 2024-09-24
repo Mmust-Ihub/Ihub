@@ -9,9 +9,9 @@ function Main() {
       <h2 className="w-full text-secondary font-bold text-3xl mt-6 mb-8">
         Make an inquiry or Partner with us
       </h2>
-      <div className="w-full grid h-[00px grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className=" flex  flex-col  gap-4 space-y-4 px-4 py-8 bg-[#E0F7FA] w-full items-center rounded-xl">
-          <h3 className="text-2xl font-bold mb-6 text-secondary">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className=" flex  flex-col  gap-4 space-y-4 px-4 py-8 bg-[#E0F7FA] w-full rounded-xl items-start">
+          <h3 className="text-2xl font-bold mb-6 text-secondary text-left w-full">
             Get in touch with us
           </h3>
           <ul className="space-y-8 text-black">
@@ -79,7 +79,7 @@ function Main() {
           </ul>
         </div>
         <div className=" flex  flex-col  gap-4 space-y-4 px-4 lg:px-12 py-8 bg-[#E0F7FA] w-full items-center justify-center rounded-xl">
-          <h3 className="text-2xl font-bold mb-6 text-secondary">
+          <h3 className="text-2xl font-bold mb-6 text-secondary  text-left w-full">
             Feel Free to write to us
           </h3>
           <form action="" className="w-full flex flex-col gap-4">
