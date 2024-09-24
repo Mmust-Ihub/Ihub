@@ -5,7 +5,7 @@ import img3 from "../../assets/OurTeam/antony.jpeg";
 import img4 from "../../assets/OurTeam/joe.jpeg";
 import img5 from "../../assets/OurTeam/jossy.jpeg";
 import img6 from "../../assets/OurTeam/sebbie1.jpeg";
-import img7 from "../../assets/OurTeam/neema.webp";
+import img7 from "../../assets/OurTeam/neema.jpg";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
 function OurTeam() {
