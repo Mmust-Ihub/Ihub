@@ -2,13 +2,20 @@ import React, { useState } from "react";
 import { TiThMenu } from "react-icons/ti";
 import Logo from "../../../assets/webp/Logo.webp";
 import { motion } from "framer-motion";
+import useAuthToken from "../../../pages/admin/AuthContext";
 // import { Link } from "react-router-dom";
 
 const Header = () => {
+  const {clearAuthToken} = useAuthToken();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  const Logout = () => {
+    localStorage.removeItem("authToken");
+    clearAuthToken();
+    window.location.href = "/login";
+  }
 
   return (
     <motion.header
@@ -32,23 +39,23 @@ const Header = () => {
       <div className="flex gap-10 text-blue-800 ">
         <ul className="hidden md:flex flex-row gap-10">
           <li className="active:text-purple-600 hover:text-purple-600">
-            <a href="/admin/add-project">Add Project</a>
+            <a href="/admin/create-project">Add Project</a>
           </li>
           <li className="active:text-purple-600 hover:text-purple-600">
-            <a href="/admin/add-event">Add event</a>
+            <a href="/admin/create-event">Add event</a>
           </li>
           <li className="active:text-purple-600 hover:text-purple-600">
-            <a href="Add-testimonial">Add Testimonial</a>
+            <a href="/admin/create-testimonial">Add Testimonial</a>
+          </li>
+          <li>
+            <button onClick={Logout}
+              className="bg-primary text-white font-bold rounded-md hover:bg-purple-600 p-2 px-3 ">
+              Logout
+            </button>
           </li>
           {/* <li className="active:text-purple-600 hover:text-purple-600">
             <a href="#events">Events</a>
           </li> */}
-          <li className="active:text-purple-600 hover:text-purple-600">
-            <a href="#community">Community</a>
-          </li>
-          <li className="active:text-purple-600 hover:text-purple-600">
-            <a href="#contact">Contact</a>
-          </li>
         </ul>
         <ul
           className={`${
@@ -58,35 +65,21 @@ const Header = () => {
           } md:fle flex-row w-full h-full gap-10 transition-all duration-500 ease-in-out md:hidden`}
         >
           <li className="active:text-purple-600 hover:text-purple-600">
-            <a href="#about" onClick={toggleMenu}>
-              About
-            </a>
+            <a href="/admin/create-project">Add Project</a>
           </li>
           <li className="active:text-purple-600 hover:text-purple-600">
-            <a href="#services" onClick={toggleMenu}>
-              Services
-            </a>
+            <a href="/admin/create-event">Add event</a>
           </li>
           <li className="active:text-purple-600 hover:text-purple-600">
-            <a href="#products" onClick={toggleMenu}>
-              Projects
-            </a>
+            <a href="/admin/create-testimonial">Add Testimonial</a>
           </li>
-          {/* <li className="active:text-purple-600 hover:text-purple-600">
-            <a href="#events" onClick={toggleMenu}>
-              Events
-            </a>
-          </li> */}
-          <li className="active:text-purple-600 hover:text-purple-600">
-            <a href="#community" onClick={toggleMenu}>
-              Community
-            </a>
+          <li>
+            <button onClick={Logout}
+              className="bg-primary text-white  font-bold rounded-md hover:bg-purple-600 p-2 px-3 ">
+              Logout
+            </button>
           </li>
-          <li className="active:text-purple-600 hover:text-purple-600">
-            <a href="#contact" onClick={toggleMenu}>
-              Contact
-            </a>
-          </li>
+          
         </ul>
         <div
           className={`min-[768px]:hidden cursor-pointer z-50`}
