@@ -3,7 +3,7 @@ import { HashLink } from "react-router-hash-link";
 import { FaArrowDown } from "react-icons/fa";
 function Hero() {
   return (
-    <div className="w-screen h-screen px-6 lg:px-12 py-8 text-white contactbg mt-0 flex flex-col justify-center items-center pt-[100px] lg:pt-0">
+    <div className="w-screen h-[50vh] lg:h-[60vh]  px-6 lg:px-12 py-8 text-white contactbg flex flex-col justify-center items-center pt-[100px] lg:pt-0 mt-[80px]">
       <div className="w-full flex items-center justify-center  flex-col">
         <h2 className="text-5xl lg:text-6xl text-white font-bold mb-12">
           Contact Us

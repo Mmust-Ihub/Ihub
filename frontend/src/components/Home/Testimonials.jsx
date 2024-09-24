@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-
 function Testimonials() {
   const [loading, setLoading] = useState(false);
   var settings = {
@@ -51,14 +50,13 @@ function Testimonials() {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://ihub-mu.vercel.app/api/v1/testimonials",
+        ` ${import.meta.env.VITE_BACKENED_URL}/testimonials`,
         {
           method: "GET",
         }
       );
       const data = await response.json();
       setTestimonials(data);
-      
     } catch (error) {
       console.log(error);
     } finally {
@@ -72,15 +70,15 @@ function Testimonials() {
     FetchTestimonials();
   }, []);
   return (
-    <div className="w-screen px-4 py-6 md:px-12 lg:px-20 bg-[#E0F7FA] md:mb-8">
-      <h2 className="text-secondary font-bold text-2xl mt-4 mb-4">
+    <div className="w-screen px-4 py-6 md:px-12 lg:px-20 bg-[#E0F7FA] md:mb-8 ">
+      <h2 className="text-secondary font-bold text-2xl mt-8 mb-4">
         Testimonials
       </h2>
 
       {loading ? (
         <div className="flex flex-col justify-center items-center">
           <img src={"/loading.gif"} alt="loading" className="w-24 h-24" />
-          <p className="w-full text-center text-primary text-xl">
+          <p className="w-full text-center text-secondary text-xl">
             Loading testimonials...
           </p>
         </div>
@@ -91,12 +89,12 @@ function Testimonials() {
               key={index}
               className="shadow-3xl shadow-black overflow-ellipsis justify-center items-center flex text-black p-1"
             >
-              <div className="bg-white   h-[200px] px-6 py-4 rounded-2xl flex flex-row items-start justify-start space-x-4 mx-2">
-                <div className="w-[200px]">
+              <div className="bg-white  h-[220px] px-6 py-4 rounded-2xl flex flex-row items-start justify-start space-x-4 mx-2 ">
+                <div className="w-[200px] overflow-clip">
                   <img
                     src={testimonial.imageUrl}
                     alt="person image"
-                    className=" rounded-full object-cover w-[70px]"
+                    className="rounded-full object-cover w-[70px] h-[70px]"
                   />
                 </div>
                 <div>
@@ -106,7 +104,7 @@ function Testimonials() {
                   <span className="font-semibold w-full italic text-black ">
                     , {testimonial.occupation}
                   </span>
-                  <p className="p-2 ">{testimonial.message}</p>
+                  <p className="p-4 ">{testimonial.message}</p>
                 </div>
               </div>
             </div>
