@@ -11,6 +11,7 @@ require("./helpers/mongoDBHelper");
 const multer = require("multer");
 const { projectRouter } = require("./routes/project");
 const { donationRouter } = require("./routes/donation");
+const { eventRouter } = require("./routes/events");
 
 const upload = multer();
 dotenv.config();
@@ -35,6 +36,7 @@ app.use("/api/v1", authRouter);
 app.use("/api/v1", userRouter);
 app.use("/api/v1", testimonialRouter);
 app.use("/api/v1", projectRouter);
+app.use("/api/v1", eventRouter);
 app.use("/api/v1", donationRouter);
 
 // error handling
