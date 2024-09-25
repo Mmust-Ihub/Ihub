@@ -69,7 +69,13 @@ button {
     ),
     url("./assets/contact/rectangle.webp");
   background-repeat: no-repeat;
+  background-size:cover;
+}
+.projectbg {
+  background-image: url("./assets/projecs/Rectangle.webp");
+  background-repeat: no-repeat;
   background-size: cover;
+  background-position: top;
 }
 .communitybg {
   background-image: linear-gradient(
@@ -79,9 +85,10 @@ button {
     url("./assets/communityandevent/comm.webp");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: top;
 }
 .bg {
-   background: url("./assets/webp/footer.webp");
+  background: url("./assets/webp/footer.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -96,7 +103,6 @@ button {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
 }
 
 .herobg {
@@ -104,8 +110,7 @@ button {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}  
-
+}
 
 ::-webkit-scrollbar {
   width: 5px;

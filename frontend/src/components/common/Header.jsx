@@ -15,29 +15,8 @@ const Header = ({ setShowSidebar }) => {
 
   return (
     <>
-      <motion.div
-        className="bg-white z-[9999] sticky"
-        initial={{ y: "-100%", opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{
-          ease: "easeInOut",
-          duration: 0.6,
-          // delay: 0.01,
-        }}
-      >
-        <div
-          className="p-4 text-danger"
-          style={{
-            background:
-              "repeating-linear-gradient(-55deg, #222, rgb(34, 34, 34) 10px, rgb(234, 179, 8) 10px, rgb(234, 179, 8) 20px)",
-          }}
-        ></div>
-        <div className="p-4 text-center text-black bg-yellow-500 font-bold">
-          SITE UNDER CONSTRUCTION...
-        </div>
-      </motion.div>
       <motion.header
-        className="sticky top-0 right-0 bg-white w-screen text-black shadow-xl z-[9999] justify-between items-center px-6 flex h-[80px] text-center"
+        className="fixed top-0 right-0 bg-white w-screen text-black shadow-xl z-[9999] justify-between items-center px-6 flex h-[80px] text-center"
         initial={{ y: "-100%", opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{

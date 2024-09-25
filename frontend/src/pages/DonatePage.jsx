@@ -3,6 +3,7 @@ import Header from "../components/common/Header";
 import Sidebar from "../components/common/Sidebar";
 import Footer from "../components/common/Footer";
 import DonateHero from "../components/donate/DonateHero";
+// import StripeUi from "../components/donate/StripeUi";
 
 function DonatePage() {
   const [showSideBar, setShowSidebar] = useState(false);
@@ -10,7 +11,8 @@ function DonatePage() {
     <div>
       <Header setShowSidebar={setShowSidebar} />
       <Sidebar showSideBar={showSideBar} />
-      <DonateHero/>
+      <DonateHero />
+      {/* <StripeUi/> */}
       <Footer />
     </div>
   );

@@ -7,8 +7,10 @@ import MissionVision from "../components/About/MissionVision";
 import OurTeam from "../components/About/OurTeam";
 import Impact from "../components/About/Impact";
 
+
 function AboutPage() {
   const [showSideBar, setShowSidebar] = useState(false);
+ 
   return (
     <div>
       <Header setShowSidebar={setShowSidebar} />

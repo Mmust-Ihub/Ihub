@@ -1,41 +1,10 @@
-import React from "react";
-import img from "../../assets/person1.webp";
-
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-const testimonials = [
-  {
-    id: 1,
-    parentName: "Wanjiku Muthoni",
-    role: "parent",
-    testimonial:
-      "The website development team at MMUST iHub transformed our online store into a sleek, user-friendly platform. The professional design and advanced features have significantly improved our customer engagement and sales.",
-  },
-  {
-    id: 2,
-    parentName: "Maina Gitonga",
-    role: "parent",
-    testimonial:
-      "The website development team at MMUST iHub transformed our online store into a sleek, user-friendly platform. The professional design and advanced features have significantly improved our customer engagement and sales.",
-  },
-  {
-    id: 3,
-    parentName: "Wangari Chepkorir",
-    role: "parent",
-    testimonial:
-      "The website development team at MMUST iHub transformed our online store into a sleek, user-friendly platform. The professional design and advanced features have significantly improved our customer engagement and sales.",
-  },
-  {
-    id: 4,
-    parentName: "Kariuki Omondi",
-    role: "parent",
-    testimonial:
-      "The website development team at MMUST iHub transformed our online store into a sleek, user-friendly platform. The professional design and advanced features have significantly improved our customer engagement and sales.",
-  },
-];
 
 function Testimonials() {
+  const [loading, setLoading] = useState(false);
   var settings = {
     dots: true,
     arrows: false,
@@ -43,12 +12,12 @@ function Testimonials() {
     speed: 5000,
     slidesToShow: 2,
     slidesToScroll: 1,
-    autoplay: true,
     autoPlaySpeed: 0,
     focusOnSelect: true,
     cssEase: "linear",
     pauseOnHover: true,
     pauseOnFocus: true,
+    autoplay: true,
 
     responsive: [
       {
@@ -76,40 +45,72 @@ function Testimonials() {
       },
     ],
   };
+  const [testimonials, setTestimonials] = useState([]);
+  const FetchTestimonials = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        ` ${import.meta.env.VITE_BACKENED_URL}/testimonials`,
+        {
+          method: "GET",
+        }
+      );
+      const data = await response.json();
+      setTestimonials(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+      console.log("Testimonials fetched successfully");
+    }
+  };
+  const [readMore, setReadMore] = useState(0);
 
+  useEffect(() => {
+    FetchTestimonials();
+  }, []);
   return (
-    <div className="w-screen px-4 py-6 md:px-12 lg:px-20 bg-[#E0F7FA] md:mb-8">
-      <h2 className="text-secondary font-bold text-2xl mt-4 mb-4">
+    <div className="w-screen px-4 py-6 md:px-12 lg:px-20 bg-[#E0F7FA] md:mb-8 ">
+      <h2 className="text-secondary font-bold text-2xl mt-8 mb-4">
         Testimonials
       </h2>
 
-      <Slider {...settings}>
-        {testimonials?.map((testimonial, index) => (
-          <div
-            key={index}
-            className="shadow-3xl shadow-black justify-center items-center flex text-black p-1"
-          >
-            <div className="bg-white px-6 py-4 rounded-2xl flex flex-row items-start justify-start space-x-4 mx-2">
-              <div className="w-[200px]">
-                <img
-                  src={img}
-                  alt="person image"
-                  className=" rounded-full object-contain w-[150px]"
-                />
-              </div>
-              <div>
-                <span className="w-full text-black  font-semibold">
-                  {testimonial.parentName}
-                </span>
-                <span className="font-semibold w-full italic text-black ">
-                  , {testimonial.role}
-                </span>
-                <p>{testimonial.testimonial}</p>
+      {loading ? (
+        <div className="flex flex-col justify-center items-center">
+          <img src={"/loading.gif"} alt="loading" className="w-24 h-24" />
+          <p className="w-full text-center text-secondary text-xl">
+            Loading testimonials...
+          </p>
+        </div>
+      ) : (
+        <Slider {...settings}>
+          {testimonials?.map((testimonial, index) => (
+            <div
+              key={index}
+              className="shadow-3xl shadow-black overflow-ellipsis justify-center items-center flex text-black p-1"
+            >
+              <div className="bg-white  h-[220px] px-6 py-4 rounded-2xl flex flex-row items-start justify-start space-x-4 mx-2 ">
+                <div className="w-[200px] overflow-clip">
+                  <img
+                    src={testimonial.imageUrl}
+                    alt="person image"
+                    className="rounded-full object-cover w-[70px] h-[70px]"
+                  />
+                </div>
+                <div>
+                  <span className="w-full text-black  font-semibold">
+                    {testimonial.name}
+                  </span>
+                  <span className="font-semibold w-full italic text-black ">
+                    , {testimonial.occupation}
+                  </span>
+                  <p className="p-4 ">{testimonial.message}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </Slider>
+          ))}
+        </Slider>
+      )}
     </div>
   );
 }
