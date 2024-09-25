@@ -2,26 +2,30 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
-      target: production
-    restart: unless-stopped
+      dockerfile: dev.Dockerfile
     image: backend
-    container_name: backend-cont
     env_file:
-      - path: ./backend/.env.prod
+      - path: ./backend/.env
         required: true
     expose:
       - 3000
     ports:
-      - "3000:3000"
+      - "3000"
+    deploy:
+      mode: Replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
     environment:
       mongoDbUrl: mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@mongodb:27017
-      mongoDbName: Shortify
+      mongoDbName: ihub
       NODE_ENV: production
     depends_on:
       - mongodb
     networks:
-      - shortify
+      - ihub
     stdin_open: true
     tty: true
 
@@ -30,15 +34,13 @@ services:
       context: ./frontend
       dockerfile: dev.Dockerfile
     image: frontend
-    container_name: frontend-cont
     restart: always
     ports:
       - "80:80"
+      - "443:443"
     networks:
-      - shortify
-
+      - ihub
     depends_on:
-      - mongodb
       - backend
     stdin_open: true
     tty: true
@@ -53,9 +55,9 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
     networks:
-      - shortify
+      - ihub
     volumes:
-      - shortify-data:/data/db
+      - ihub-data:/data/db
     stdin_open: true
     tty: true
 
@@ -66,7 +68,7 @@ services:
     ports:
       - "8081:8081"
     networks:
-      - shortify
+      - ihub
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGODB_USER}
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_PASSWORD}
@@ -78,9 +80,9 @@ services:
     tty: true
 
 volumes:
-  shortify-data:
+  ihub-data:
     driver: local
 
 networks:
-  shortify:
+  ihub:
     driver: bridge

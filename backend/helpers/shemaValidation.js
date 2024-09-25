@@ -1,4 +1,5 @@
 const joi = require("joi");
+const moment = require("moment")
 
 exports.registerSchema = joi.object({
   username: joi.string().alphanum().min(3).max(30).required(),
@@ -23,3 +24,18 @@ exports.testimonialSchema = joi.object({
   message: joi.string().min(5).required(),
   rating: joi.number().required(),
 })
+
+exports.eventSchema = joi.object({
+  title: joi.string().min(3).required(),
+  short_description: joi.string().min(10).required(),
+  long_description: joi.string().min(20).required(),
+  start_date: joi.string().required(),
+  end_date: joi.string().required(),
+  tags: joi.array(),
+  event_type: joi.string().valid("in-person", "online"),
+event_link: joi.string().required()
+})
+
+exports.validateDate = async(data) => {
+  return moment(date, "YYYY-MM-DD").isValid()
+}
