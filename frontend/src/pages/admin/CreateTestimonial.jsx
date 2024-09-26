@@ -35,7 +35,7 @@ function CreateTestimonial() {
 
               try {
                     const response = await fetch(
-                      "https://ihub-mu.vercel.app/api/v1/testimonials",
+                      `${import.meta.env.VITE_BACKENED_URL}/testimonials`,
                       {
                         method: "POST",
                         body: data,

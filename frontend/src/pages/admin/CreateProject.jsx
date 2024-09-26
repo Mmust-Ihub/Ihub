@@ -42,7 +42,7 @@ const CreateProject = () => {
 
     try {
       const response = await fetch(
-        "https://ihub-mu.vercel.app/api/v1/projects",
+        `${import.meta.env.VITE_BACKENED_URL}/projects`,
         {
           method: "POST",
           body: formData,
