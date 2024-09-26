@@ -1,11 +1,11 @@
 const eventRouter = require("express").Router();
-const { createEvent, getUpcomingEvents, getPastEvents } = require("../controllers/events");
+const { createEvent, getUpcomingEvents, getPastEvents, deleteEvent, getEvent } = require("../controllers/events");
 const { verifyAccessToken } = require("../helpers/getJwt");
 
 eventRouter.post("/events", verifyAccessToken, createEvent)
 eventRouter.get("/events/upcoming", getUpcomingEvents)
 eventRouter.get("/events/past", getPastEvents)
-// eventRouter.get("/projects/category", getProjectByGatgory)
-// eventRouter.delete("/projects/:id", verifyAccessToken, deleteProject)
+eventRouter.get("/events/details/:slug", getEvent)
+eventRouter.delete("/events/:id", verifyAccessToken, deleteEvent)
 
-module.exports = {eventRouter}
+module.exports = { eventRouter }

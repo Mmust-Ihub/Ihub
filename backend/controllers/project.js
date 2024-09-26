@@ -63,7 +63,7 @@ exports.getProject = async (req, res, next) => {
     next(error);
   }
 };
-exports.getProjectByGatgory = async (req, res, next) => {
+exports.getProjectByCategory = async (req, res, next) => {
   try {
     const category =
       req.query.category !== undefined ? req.query.category : "web";

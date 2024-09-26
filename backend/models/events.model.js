@@ -6,6 +6,10 @@ const eventsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    slug: {
+      type: String,
+      required: true
+    },
     short_description: {
       type: String,
       required: true,
@@ -38,6 +42,11 @@ const eventsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
+    }
   },
   { timestamps: true }
 );
