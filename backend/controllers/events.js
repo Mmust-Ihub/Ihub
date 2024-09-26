@@ -7,7 +7,6 @@ const { eventsModel } = require("../models/events.model");
 exports.createEvent = async (req, res, next) => {
   try {
     const body = req.body;
-    body.tags = JSON.parse(body.tags).tags;
     const result = eventSchema.validate(body);
     if (result?.error) {
       const error = result.error.details[0].message;
