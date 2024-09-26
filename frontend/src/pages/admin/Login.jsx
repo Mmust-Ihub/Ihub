@@ -13,12 +13,13 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const { updateAuthToken, getItem } = useAuthToken();
   const { token } = getItem();
   useEffect(() => {
     if (token) {
-      window.location.href = "/admin/dashboard";
+      window.location.href = "/admin/create-project";
     }
   }, []);
   
@@ -58,9 +59,8 @@ const LoginForm = () => {
         console.log(data);
 
         if (data.status === "success") {
-          notify("Successfully logged in");
-          login(data.accessToken);
-          updateAuthToken(data?.accessToken);
+              localStorage.setItem("authToken", data?.accessToken);
+          updateAuthToken(data?.accessToken); 
           navigate("/admin/dashboard");
         }
       } catch (err) {
