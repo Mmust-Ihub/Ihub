@@ -1,0 +1,88 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dev.Dockerfile
+    image: backend
+    env_file:
+      - path: ./backend/.env
+        required: true
+    expose:
+      - 3000
+    ports:
+      - "3000"
+    deploy:
+      mode: Replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    environment:
+      mongoDbUrl: mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@mongodb:27017
+      mongoDbName: ihub
+      NODE_ENV: production
+    depends_on:
+      - mongodb
+    networks:
+      - ihub
+    stdin_open: true
+    tty: true
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    image: frontend
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - ihub
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
+
+  mongodb:
+    restart: always
+    image: mongo
+    container_name: mongo-cont
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+    networks:
+      - ihub
+    volumes:
+      - ihub-data:/data/db
+    stdin_open: true
+    tty: true
+
+  mongo-express:
+    restart: always
+    image: mongo-express
+    container_name: express-cont
+    ports:
+      - "8081:8081"
+    networks:
+      - ihub
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGODB_USER}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_PASSWORD}
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_backend: mongodb
+    depends_on:
+      - mongodb
+    stdin_open: true
+    tty: true
+
+volumes:
+  ihub-data:
+    driver: local
+
+networks:
+  ihub:
+    driver: bridge

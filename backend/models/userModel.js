@@ -30,4 +30,32 @@ userSchema.pre("save", async function () {
   }
 });
 
-exports.userModel = mongoose.model("User", userSchema);
+const testimonialSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    occupation: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    message: {
+      type: String,
+      required: true,
+    },
+    rating: {
+      type: Number,
+      required: true,
+    },
+    imageUrl: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+const userModel = mongoose.model("User", userSchema);
+const testimonialModel = mongoose.model("Testimonial", testimonialSchema);
+module.exports = { userModel, testimonialModel };

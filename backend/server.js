@@ -2,14 +2,16 @@ const express = require("express");
 const logger = require("morgan");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const os = require("os")
 const cookieParser = require("cookie-parser")
 const createError = require("http-errors");
 const { authRouter } = require("./routes/auth");
-const { userRouter } = require("./routes/user");
+const { userRouter, testimonialRouter } = require("./routes/user");
 require("./helpers/mongoDBHelper");
 const multer = require("multer");
 const { projectRouter } = require("./routes/project");
 const { donationRouter } = require("./routes/donation");
+const { eventRouter } = require("./routes/events");
 
 const upload = multer();
 dotenv.config();
@@ -23,15 +25,18 @@ app.use(cookieParser())
 app.use(logger("dev"));
 app.use(cors());
 
-app.get("/", async (req, res) => {
+app.get("/api/healthcheck", async (req, res) => {
   res.status(200).json({
-    "Hello there": "Welcome to the ihub api",
+    "Hello there": "Welcome to the ihub api (staging)",
+    "hostname": os.hostname()
   });
 });
 
 app.use("/api/v1", authRouter);
 app.use("/api/v1", userRouter);
+app.use("/api/v1", testimonialRouter);
 app.use("/api/v1", projectRouter);
+app.use("/api/v1", eventRouter);
 app.use("/api/v1", donationRouter);
 
 // error handling

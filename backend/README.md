@@ -6,7 +6,7 @@
 
 **Things to take note of**
 
-#### dev_base_url: https://ihub-backend-seven.vercel.app
+#### dev_base_url: https://ihub-mu.vercel.app/
 
 #### prod_base_url: "http://localhost:3000"
 
@@ -195,8 +195,97 @@
    "success": "password set successfully",
 ```
 
-# PROJECTS
+# Testimonials
 
+## create testimonial
+
+> **request**
+
+- **_url_**: `{{dev_base_url}}/api/v1/testimonials`
+- **_method:_** `POST`
+
+- **_Headers:_**
+
+  - `Content-Type: multipart/form-data `
+
+- **_request body_**:
+  ```json
+  "name": "name of th client",
+  "occupation": "client's occupation",
+  "message": "what the client has to say",
+  "rating": "user rating 0-5",
+  "image": "client's images"
+  ```
+  > **Response**
+- status code: `201`
+- response body:
+  ```json
+  "name": "name of th client",
+  "occupation": "client's occupation",
+  "message": "what the client has to say",
+  "rating": "user rating 0-5",
+  "image": "https://res.cloudinary.com/dlio7cpjo/image/upload/v1725631396/mmust-ihub/xxyf52f4xx98eaz7vhae.png"
+  ```
+
+## Get testimonials (with pagination features)
+
+> **request**
+
+- **_url_**: `{{dev_base_url}}/api/v1/testimonials`
+- **_method:_** `GET`
+
+- **_Headers:_**
+
+  - `Content-Type: application/json`
+
+- **_Optional query parameters:_**
+
+| Parameter |  Type   | Default |
+| :-------: | :-----: | :-----: |
+|   page    | integer |    0    |
+|  perPage  | integer |    5    |
+
+> **Response**
+
+- status code: `200`
+- response body:
+  ```json
+  [
+    {
+      "_id": "66eb85ec981c8520150c0b62",
+      "name": "Ralph Emmerich",
+      "occupation": "Forward Integration Developer",
+      "message": "Et deserunt voluptas temporibus nam ut.",
+      "rating": 3,
+      "imageUrl": "https://res.cloudinary.com/dlio7cpjo/image/upload/v1726711275/mmust-ihub/eajf6foc6ki5vimj6oqx.png",
+    }
+  ]
+  ```
+
+## Delete Testimonial
+
+> **request**
+
+- **_url_**: `{{dev_base_url}}/api/v1/testimonials/{_id}`
+- **_method:_** `Delete`
+
+- **_Headers:_**
+
+  - `Content-Type: application/json`
+  - `Authorization: Bearer <token>`
+
+> **Response**
+
+- status code: `200`
+- response body:
+  ```json
+  {
+    "status": "success",
+    "message": "testimonial deleted successfully ..."
+  }
+  ```
+
+# PROJECTS
 ## create project
 
 > **request**
@@ -345,6 +434,218 @@
   }
   ```
 
+# EVENTS
+## create an event
+> **request**
+
+- url: `{{dev_base_url}}/api/v1/events`
+- method: `POST`
+- Authorization: `Bearer token`
+- request body:
+  ```json
+  "title": "The title of the event",
+  "short_description": "The short description to be displayed",
+  "long_description": "A more detailed info about the event",
+  "start_date": "YYYY-MM-DD should be in this form",
+  "tags": ["Hackathon", "Community"]
+  "event_link": "The link for the event registration"
+  "image": "The image file fo the event"
+  ```
+  > **Response**
+- status code: `201`
+- response body:
+  ```json
+  { "status": "success",
+    "message": "project created successfully"
+   }
+  ```
+## Get upcoming events (with pagination features)
+
+> **request**
+
+- **_url_**: `{{dev_base_url}}/api/v1/events/upcoming`
+- **_method:_** `GET`
+
+- **_Headers:_**
+
+  - `Content-Type: application/json`
+
+- **_Optional query parameters:_**
+
+| Parameter |  Type   | Default |
+| :-------: | :-----: | :-----: |
+|   page    | integer |    0    |
+|  perPage  | integer |    5    |
+
+> **Response**
+
+- status code: `200`
+- response body:
+  ```json
+  [
+    {
+        "_id": "66f50c1f3a0238ca38255a6b",
+        "title": "Voluptatem eaque ipsam.",
+        "slug": "Voluptatem-eaque-ipsam.",
+        "short_description": "Dolor enim odio et laudantium enim ducimus facere aspernatur. Quae aut a error atque harum dolores distinctio.",
+        "long_description": "Libero voluptatibus inventore autem eum.",
+        "start_date": "2024-06-24T10:28:54.000Z",
+        "end_date": "2024-12-08T23:48:19.000Z",
+        "tags": [
+            "community",
+            "event"
+        ],
+        "event_type": "in-person",
+        "image_url": "https://image.localhost",
+        "event_link": "https://aisha.com",
+        "createdBy": "66f156c5c3d424e6edfc38d0",
+        "__v": 0
+    }
+  ]
+  ```
+## Get past events (with pagination features)
+
+> **request**
+
+- **_url_**: `{{dev_base_url}}/api/v1/events/past`
+- **_method:_** `GET`
+
+- **_Headers:_**
+
+  - `Content-Type: application/json`
+
+- **_Optional query parameters:_**
+
+| Parameter |  Type   | Default |
+| :-------: | :-----: | :-----: |
+|   page    | integer |    0    |
+|  perPage  | integer |    5    |
+
+> **Response**
+
+- status code: `200`
+- response body:
+  ```json
+  [
+    {
+        "_id": "66f50c1f3a0238ca38255a6b",
+        "title": "Voluptatem eaque ipsam.",
+        "slug": "Voluptatem-eaque-ipsam.",
+        "short_description": "Dolor enim odio et laudantium enim ducimus facere aspernatur. Quae aut a error atque harum dolores distinctio.",
+        "long_description": "Libero voluptatibus inventore autem eum.",
+        "start_date": "2024-06-24T10:28:54.000Z",
+        "end_date": "2024-12-08T23:48:19.000Z",
+        "tags": [
+            "community",
+            "event"
+        ],
+        "event_type": "in-person",
+        "image_url": "https://image.localhost",
+        "event_link": "https://aisha.com",
+        "createdBy": "66f156c5c3d424e6edfc38d0",
+        "__v": 0
+    }
+  ]
+
+## Get past events (with pagination features)
+> **request**
+
+- **_url_**: `{{dev_base_url}}/api/v1/events/past`
+- **_method:_** `GET`
+
+- **_Headers:_**
+
+  - `Content-Type: application/json`
+
+- **_Optional query parameters:_**
+
+| Parameter |  Type   | Default |
+| :-------: | :-----: | :-----: |
+|   page    | integer |    0    |
+|  perPage  | integer |    5    |
+
+> **Response**
+
+- status code: `200`
+- response body:
+  ```json
+  [
+    {
+        "_id": "66f50c1f3a0238ca38255a6b",
+        "title": "Voluptatem eaque ipsam.",
+        "slug": "Voluptatem-eaque-ipsam.",
+        "short_description": "Dolor enim odio et laudantium enim ducimus facere aspernatur. Quae aut a error atque harum dolores distinctio.",
+        "long_description": "Libero voluptatibus inventore autem eum.",
+        "start_date": "2024-06-24T10:28:54.000Z",
+        "end_date": "2024-12-08T23:48:19.000Z",
+        "tags": [
+            "community",
+            "event"
+        ],
+        "event_type": "in-person",
+        "image_url": "https://image.localhost",
+        "event_link": "https://aisha.com",
+        "createdBy": "66f156c5c3d424e6edfc38d0",
+        "__v": 0
+    }
+  ]
+  ```
+
+## Get a single Event
+
+> **request**
+
+- **_url_**: `{{dev_base_url}}/api/v1/events/details/{slug}`
+- **_method:_** `GET`
+
+- **_Headers:_**
+
+  - `Content-Type: application/json`
+
+> **Response**
+
+- status code: `200`
+- response body:
+  ```json
+  {
+    "_id": "66f50c1f3a0238ca38255a6b",
+    "title": "Voluptatem eaque ipsam.",
+    "slug": "Voluptatem-eaque-ipsam.",
+    "short_description": "Dolor enim odio et laudantium enim ducimus facere aspernatur. Quae aut a error atque harum dolores distinctio.",
+    "long_description": "Libero voluptatibus inventore autem eum. Iure aspernatur sint quisquam. Vitae officiis sed et earum maiores. Cum nulla et voluptates rem iste aut aut.",
+    "start_date": "2024-06-24T10:28:54.000Z",
+    "end_date": "2024-12-08T23:48:19.000Z",
+    "tags": [
+        "community",
+        "event"
+    ],
+    "event_type": "in-person",
+    "image_url": "https://image.localhost",
+    "event_link": "https://aisha.com",
+    "createdBy": "66f156c5c3d424e6edfc38d0",
+    "__v": 0
+  }
+  ```
+## Delete project
+
+> **request**
+
+- **_url_**: `{{dev_base_url}}/api/v1/events/{_id}`
+- **_method:_** `Delete`
+
+- **_Headers:_**
+
+  - `Content-Type: application/json`
+  - `Authorization: Bearer <token>`
+
+> **Response**
+
+- status code: `204`
+- response body:
+  ```json
+  None
+  ```
+
 # Donations
 
  <h2>1. Mpesa</h2>
@@ -360,7 +661,7 @@
 
   - `Content-Type: application/json`
 
-- **_Body:_**
+- **_request Body:_**
   ```json
   {
     "email": "email of the donor",
@@ -379,9 +680,12 @@
     "checkoutRequestId": "ws_CO_10092024194005201743596183"
   }
   ```
+
 ### Check on the transaction status.
+
 > This requires you to poll this endpoint at a certain interval to check the status of the transaction.
-- The possible statuses are failed, success, pending
+
+- Possible statuses are failed, success, pending
 - One you get the failed status, it means the user cancelled the transaction hence your program should stop the poll.
 
 > **request**
@@ -402,7 +706,6 @@
     "status": "success"
   }
   ```
-
 
  <h2>2. Mastercard payment </h2>
 

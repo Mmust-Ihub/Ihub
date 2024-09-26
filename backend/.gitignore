@@ -3,6 +3,7 @@ node_modules/
 gemini.js
 test.txt
 test.js
+mpesa.js
 # Created by https://www.toptal.com/developers/gitignore/api/node
 # Edit at https://www.toptal.com/developers/gitignore?templates=node
 

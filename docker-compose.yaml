@@ -1,6 +1,43 @@
-# the compose file to deploy the services
 services:
-   server:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: backend
+    env_file:
+      - path: ./backend/.env.prod
+        required: true
+    expose:
+      - 3000
+    ports:
+      - "3000"
+    deploy:
+      mode: Replicated
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    networks:
+      - ihub
+    stdin_open: true
+    tty: true
 
-   client:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - ihub
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
 
+networks:
+  ihub:
+    driver: bridge
