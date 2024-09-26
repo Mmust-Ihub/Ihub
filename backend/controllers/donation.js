@@ -5,7 +5,6 @@ const { successEmail, sendMail, failureEmail } = require("../utils/sendMail");
 
 exports.donateByMpesa = async (req, res, next) => {
   try {
-    console.log(req.body);
     const { email, phoneNumber, amount } = req.body;
     if (!email || !phoneNumber || !amount) {
       throw createError.BadRequest(
