@@ -16,9 +16,13 @@ exports.sendMail = (payload) => {
       },
     });
     const text = convert(payload.html, { wordwrap: 130 });
+    const emailFrom =
+      payload.from !== undefined ? payload.from : process.env.gmailUser;
+    const emailTo =
+      payload.to !== undefined ? payload.to : process.env.gmailUser;
     const mailOptions = {
-      from: process.env.gmailUser,
-      to: payload.email,
+      from: emailFrom,
+      to: emailTo,
       subject: payload.subject,
       text: payload.html,
       html: payload.html,
@@ -34,7 +38,7 @@ exports.sendMail = (payload) => {
 
 exports.successEmail = (email, amount) => {
   return {
-    email: email,
+    to: email,
     subject: "Thank You for Your Donation! Transaction Successful",
     html: `
     Dear ${email},
@@ -53,7 +57,7 @@ exports.successEmail = (email, amount) => {
 
 exports.failureEmail = (email, amount) => {
   return {
-    email: email,
+    to: email,
     subject: "Payment Issue: Your Donation Was Not Successful",
     html: `
     Dear ${email},
@@ -70,6 +74,19 @@ exports.failureEmail = (email, amount) => {
 
     Best regards,
     Mmust Ihub
+    `,
+  };
+};
+
+exports.contactMail = (data) => {
+  return {
+    from: data.email,
+    subject: "Mmust Ihub Users Contact",
+    html: `
+    Name: ${data.name+"\n\n"}
+    Email: ${data.email+"\n"}
+    PhoneNumber: ${data.phone_number+"\n\n"}
+    Message: ${data.message}
     `,
   };
 };
