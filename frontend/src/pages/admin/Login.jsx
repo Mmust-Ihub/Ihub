@@ -61,7 +61,7 @@ const LoginForm = () => {
         if (data.status === "success") {
               localStorage.setItem("authToken", data?.accessToken);
           updateAuthToken(data?.accessToken); 
-          navigate("/admin/dashboard");
+          navigate("/admin/create-project");
         }
       } catch (err) {
         setError(err.message); // Set the error message to be displayed

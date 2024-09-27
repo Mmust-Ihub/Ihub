@@ -77,6 +77,12 @@ button {
   background-size: cover;
   background-position: top;
 }
+.donatebg {
+  background-image: url("./assets/donate/donate.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+}
 .communitybg {
   background-image: linear-gradient(
       rgba(2, 204, 254, 0.62),
