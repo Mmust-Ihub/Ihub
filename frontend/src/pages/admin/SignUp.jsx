@@ -1,9 +1,8 @@
 // SignUp.js
 import React, { useState } from "react";
-import { Link,  useNavigate } from "react-router-dom";
-  import { ToastContainer, toast } from "react-toastify";
-  import "react-toastify/dist/ReactToastify.css";
-
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const notify = (message) => toast.success(message);
@@ -13,50 +12,50 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm_password, set_confirm_password] = useState("");
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  console.log("User registered:", {
-    username,
-    email,
-    password,
-    confirm_password,
-  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("User registered:", {
+      username,
+      email,
+      password,
+      confirm_password,
+    });
 
-  try {
-    const response = await fetch(
-      "https://ihub-mu.vercel.app/api/v1/auth/register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, email, password, confirm_password }),
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKENED_URL}/auth/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, email, password, confirm_password }),
+        }
+      );
+
+      console.log(response, "response");
+
+      if (!response.ok) {
+        errorNotify("An error occurred. Try again");
+        console.log(response); // Log the error for debugging
+        return;
       }
-    );
 
-    console.log(response, "response");
+      const data = await response.json();
+      console.log(data);
 
-    if (!response.ok) {
-      errorNotify("An error occurred. Try again");
-      console.log(response); // Log the error for debugging
-      return;
+      if (data.token) {
+        notify("Successfully registered");
+        login(); // Handle login logic here if needed
+      } else {
+        notify("Successfully registered. Redirecting to login...");
+        navigate("/login"); // Redirect to the login page
+      }
+    } catch (e) {
+      errorNotify("Network error. Check your connection");
+      console.log(e); // Log the error for debugging
     }
-
-    const data = await response.json();
-    console.log(data);
-
-    if (data.token) {
-      notify("Successfully registered");
-      login(); // Handle login logic here if needed
-    } else {
-      notify("Successfully registered. Redirecting to login...");
-      navigate("/login"); // Redirect to the login page
-    }
-  } catch (e) {
-    errorNotify("Network error. Check your connection");
-    console.log(e); // Log the error for debugging
-  }
-};
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
