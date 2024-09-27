@@ -32,13 +32,13 @@ const LoginForm = () => {
         setLoading(true);
         console.log("running login");
         const response = await fetch(
-          "https://ihub-mu.vercel.app/api/v1/auth/login",
+          `/${import.meta.env.VITE_BACKENED_URL}/auth/login`,
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email, password }), 
+            body: JSON.stringify({ email, password }),
           }
         );
         notify("Successfully logged in");

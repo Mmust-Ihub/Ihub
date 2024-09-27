@@ -69,7 +69,7 @@ button {
     ),
     url("./assets/contact/rectangle.webp");
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size: cover;
 }
 .projectbg {
   background-image: url("./assets/projecs/Rectangle.webp");
@@ -103,6 +103,13 @@ button {
   list-style-type: disk;
   list-style-image: url("./assets/webp/Vector.webp");
   list-style-position: inside;
+}
+.planlist {
+  list-style-type: disc;
+  list-style-image: url("./assets/Vector.png");
+  list-style-position: inside;
+
+  
 }
 .aboutbg {
   background: url("./assets/about/mantle3.webp");

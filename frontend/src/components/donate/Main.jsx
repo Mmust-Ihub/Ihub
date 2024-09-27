@@ -53,7 +53,7 @@ function Main() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/donate/mpesa`,
+        `${import.meta.env.VITE_BACKENED_URL}/donate/mpesa`,
         {
           method: "POST",
           headers: {
