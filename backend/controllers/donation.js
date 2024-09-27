@@ -48,7 +48,7 @@ exports.checkTransactionStatus = async (req, res, next) => {
 
 exports.mpesaCallback = async (req, res, next) => {
   try {
-    console.log("The callback url has been hit ....");
+    console.log("\nThe callback url has been hit ....\n");
     const { CheckoutRequestID, ResultCode, CallbackMetadata } =
       req.body.Body.stkCallback;
     const transaction = await donationModel.findOne({
