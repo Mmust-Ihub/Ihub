@@ -32,7 +32,7 @@ const LoginForm = () => {
         setLoading(true);
         console.log("running login");
         const response = await fetch(
-          "https://ihub-mu.vercel.app/api/v1/auth/login",
+          `${import.meta.env.VITE_BACKEND_URL}/login`,
           {
             method: "POST",
             headers: {

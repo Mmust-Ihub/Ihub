@@ -24,7 +24,7 @@ const handleSubmit = async (e) => {
 
   try {
     const response = await fetch(
-      "https://ihub-mu.vercel.app/api/v1/auth/register",
+      `${import.meta.env.VITE_BACKEND_URL}/register`,
       {
         method: "POST",
         headers: {
