@@ -646,8 +646,28 @@
   None
   ```
 
-# Donations
+# Contact Us
+## send us an email
+> **request**
 
+- url: `{{dev_base_url}}/api/v1/contact`
+- method: `POST`
+- request body:
+  ```json
+  "name": "The name of the user",
+  "email": "The email of the user",
+  "phone_number": "The phone number of the user",
+  "message": "The body of the email"
+  ```
+  > **Response**
+- status code: `200`
+- response body:
+  ```json
+  { "status": "success",
+    "message": "email sent successfully"
+   }
+
+# Donations
  <h2>1. Mpesa</h2>
 
 ### initiate payments using the mpesa payment gateway;
