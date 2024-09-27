@@ -7,6 +7,7 @@ import Main from "../components/donate/Main";
 // import StripeUi from "../components/donate/StripeUi";
 
 function DonatePage() {
+  
   const [showSideBar, setShowSidebar] = useState(false);
   return (
     <div>
