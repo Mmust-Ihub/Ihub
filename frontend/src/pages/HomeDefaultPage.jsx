@@ -20,7 +20,7 @@ function Homepage() {
       <About />
       <Services />
       <Testimonials />
-      {/* <Membership /> */}
+      <Membership />
       <Sponser />
       <Footer />
     </div>

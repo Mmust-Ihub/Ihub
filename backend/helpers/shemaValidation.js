@@ -39,3 +39,13 @@ event_link: joi.string().required()
 exports.validateDate = async(data) => {
   return moment(date, "YYYY-MM-DD").isValid()
 }
+
+exports.contactSchema = joi.object({
+  name: joi.string().min(3).max(30).required(),
+  email: joi
+    .string()
+    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+    .required(),
+  phone_number: joi.string().required(),
+  message: joi.string().min(5).required()
+})
