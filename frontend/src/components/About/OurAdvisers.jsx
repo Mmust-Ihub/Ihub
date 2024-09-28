@@ -36,11 +36,11 @@ function OurTeam() {
       name: "Elvis Amiani",
       img: img3,
       role: "",
-      biosource: "",
-      bio: "Elvis Amiani is an enthusiastic developer focusing on creating user-friendly applications. He thrives on challenges and is committed to continuous learning.",
+      biosource: "https://www.linkedin.com/in/amiani-liuva-469362218/",
+      bio: "My diverse experiences as a teacher and programmer, along with my internship in Health IT and leadership as IEEE MMUST Chair, have equipped me with valuable insights. I’m excited to apply my knowledge to foster growth and collaboration. As a staff member at MMUST iHub, I’m dedicated to creating impactful initiatives that inspire and empower our community.",
       github: "https://github.com/Amianie/",
-      linkedin: "",
-      twitter: "",
+      linkedin: "https://www.linkedin.com/in/amiani-liuva-469362218/",
+      twitter: "https://x.com/amiani_liuva",
     },
   ];
 
