@@ -24,6 +24,7 @@ jobs:
   Deploy:
     runs-on:
       - self-hosted
+      - Linux
       - ihub
 
     steps:
