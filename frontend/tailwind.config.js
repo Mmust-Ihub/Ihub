@@ -4,6 +4,31 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
+      keyframes: {
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        float1: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+      },
+
+      animation: {
+        float: "float 3s 3s cubic-bezier(0.5, 0, 0.5, 1) infinite",
+        float1: "float1 3s 3s cubic-bezier(0.5, 0, 0.5, 1) infinite",
+      },
+      // keyframes: {
+      //   float: {
+      //     "0%, 100%": { transform: "translateY(0)" },
+      //     "50%": { transform: "translateY(-10px)" },
+      //   },
+      // },
+      // animation: {
+      //   float: "float 3s 3s cubic-bezier(0.5, 0, 0.5, 1) infinite",
+      // },
+
       backgroundColor: {
         primary: "#2c3e9e",
         secondary: "#02CCFE",

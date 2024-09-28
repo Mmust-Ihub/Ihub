@@ -51,6 +51,22 @@ button {
 @tailwind components;
 @tailwind utilities;
 
+.animation {
+  animation: bounce1 2s infinite;
+  }
+
+  @keyframes bounce1 {
+  0%,
+  100% {
+    transform: translateY(-2%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
 @media (min-width: 2560px) {
   .xll\:h-\[530px\] {
     height: 530px;
@@ -108,8 +124,6 @@ button {
   list-style-type: disc;
   list-style-image: url("./assets/Vector.png");
   list-style-position: inside;
-
-  
 }
 .aboutbg {
   background: url("./assets/about/mantle3.webp");
