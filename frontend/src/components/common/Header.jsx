@@ -123,7 +123,7 @@ const Header = ({ setShowSidebar }) => {
 
               <Link
                 to={"/donate"}
-                className="bg-secondary px-4 h-[30px]  rounded-[60px] text-white font-[500] hover:opacity-75 hover:scale-105  transition-all duration-200 ease-in-out shadow-xl flex items-center gap-2 lg:px-6"
+                className="bg-secondary px-4 h-[30px]  rounded-[60px] text-white font-bold hover:opacity-75 hover:scale-105  transition-all duration-200 ease-in-out shadow-xl flex items-center gap-2 lg:px-6"
               >
                 <FaDonate />
                 <span>Donate</span>

@@ -6,6 +6,7 @@ import Hero from "../components/About/Hero";
 import MissionVision from "../components/About/MissionVision";
 import OurTeam from "../components/About/OurTeam";
 import Impact from "../components/About/Impact";
+import OurAdvisers from "../components/About/OurAdvisers";
 
 
 function AboutPage() {
@@ -18,6 +19,7 @@ function AboutPage() {
       <Hero />
       <MissionVision />
       <OurTeam />
+      <OurAdvisers/>
       <Impact />
       <Footer />
     </div>

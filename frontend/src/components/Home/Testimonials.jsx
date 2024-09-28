@@ -45,6 +45,7 @@ function Testimonials() {
       },
     ],
   };
+  // console.log(import.meta.env.VITE_BACKENED_URL);
   const [testimonials, setTestimonials] = useState([]);
   const FetchTestimonials = async () => {
     setLoading(true);

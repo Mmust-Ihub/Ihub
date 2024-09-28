@@ -46,7 +46,7 @@ function Hero() {
           </motion.a>
         </motion.div>
         <motion.div
-          className="hidden lg:flex"
+          className="hidden lg:flex animate-float1"
           initial={{ x: "100%", opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{

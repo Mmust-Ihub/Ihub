@@ -1,4 +1,5 @@
 import React from "react";
+import { HashLink } from "react-router-hash-link";
 
 function Membership() {
   return (
@@ -22,12 +23,13 @@ function Membership() {
               <li>Limited Event Participation</li>
             </ul>
           </div>
-          <a
-            href="/membership"
+          <HashLink
+            to="/membership#basic"
+            behavior="smooth"
             className="bg-secondary px-4 h-[35px]  rounded-[60px] text-white font-[500]  shadow-xl flex items-center gap-2 lg:px-6 mt-6 w-[180px] text-center justify-center lg:ml-[57px] hover:scale-105  transition-all duration-200 ease-in-out  absolute bottom-[-15px] translate-x-[50%] right-[50%] shadow-black"
           >
             <p> Learn More</p>
-          </a>
+          </HashLink>
         </div>
         <div className="w-full h-[320px] bg-white rounded-xl relative shadow-md shadow-black">
           <div className="flex w-full flex-col gap-8 justify-center items-center py-8">
@@ -45,12 +47,14 @@ function Membership() {
               <li>Discounts In Workshops</li>
             </ul>
           </div>
-          <a
-            href="/membership"
+          <HashLink
+            to="/membership#standard"
+            behavior="smooth"
+            href="/membership#standard"
             className="bg-secondary px-4 h-[35px]  rounded-[60px] text-white font-[500]  shadow-xl flex items-center gap-2 lg:px-6 mt-6 w-[180px] text-center justify-center lg:ml-[57px] hover:scale-105  transition-all duration-200 ease-in-out  absolute bottom-[-15px] translate-x-[50%] right-[50%] shadow-black"
           >
             <p>Learn More</p>
-          </a>
+          </HashLink>
         </div>
         <div className="w-full h-[320px] bg-white rounded-xl relative shadow-md shadow-black">
           <div className="flex w-full flex-col gap-8 justify-center items-center py-8">
@@ -68,12 +72,13 @@ function Membership() {
               <li>Networking Opportunities</li>
             </ul>
           </div>
-          <a
-            href="/membership"
+          <HashLink
+            to="/membership#premium"
+            behavior="smooth"
             className="bg-secondary px-4 h-[35px]  rounded-[60px] text-white font-[500]  shadow-xl flex items-center gap-2 lg:px-6 mt-6 w-[180px] text-center justify-center lg:ml-[57px] hover:scale-105  transition-all duration-200 ease-in-out  absolute bottom-[-15px] translate-x-[50%] right-[50%] shadow-black"
           >
             <p>Learn More</p>
-          </a>
+          </HashLink>
         </div>
       </div>
     </div>

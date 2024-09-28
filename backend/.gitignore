@@ -1,5 +1,6 @@
 node_modules/
 .env
+.env.prod
 gemini.js
 test.txt
 test.js

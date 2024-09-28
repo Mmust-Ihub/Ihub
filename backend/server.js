@@ -12,6 +12,7 @@ const multer = require("multer");
 const { projectRouter } = require("./routes/project");
 const { donationRouter } = require("./routes/donation");
 const { eventRouter } = require("./routes/events");
+const { contactRouter } = require("./routes/contact");
 
 const upload = multer();
 dotenv.config();
@@ -27,7 +28,7 @@ app.use(cors());
 
 app.get("/api/healthcheck", async (req, res) => {
   res.status(200).json({
-    "Hello there": "Welcome to the ihub api (staging)",
+    "Hello there": "Welcome to the ihub api",
     "hostname": os.hostname()
   });
 });
@@ -38,6 +39,7 @@ app.use("/api/v1", testimonialRouter);
 app.use("/api/v1", projectRouter);
 app.use("/api/v1", eventRouter);
 app.use("/api/v1", donationRouter);
+app.use("/api/v1", contactRouter);
 
 // error handling
 app.use(async (req, res, next) => {

@@ -118,7 +118,7 @@ exports.forgotPassword = async (req, res) => {
     await sendMail({
       html: resetLink,
       subject: "Forgot Password",
-      email: email,
+      to: email,
     });
     return res.status(200).json({ success: "email sent to the user" });
   } catch (error) {

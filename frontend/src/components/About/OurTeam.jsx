@@ -6,72 +6,99 @@ import img4 from "../../assets/OurTeam/joe.jpeg";
 import img5 from "../../assets/OurTeam/jossy.jpeg";
 import img6 from "../../assets/OurTeam/sebbie1.jpeg";
 import img7 from "../../assets/OurTeam/neema.jpg";
-import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { FaGithub, FaLink, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
 function OurTeam() {
   const [selectedMember, setSelectedMember] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const advisersData = [{}];
   const teamData = [
     {
       name: "Antony Kariuki",
       img: img3,
-      role: "Team Lead",
+
+      role: "Team Lead || Backend & DevOps Engineer",
+      portfolio: "",
       github: "https://github.com/KariukiAntony",
       linkedin: "https://www.linkedin.com/in/antonygichoya/",
       twitter: "https://x.com/gichoya_antony",
+      biosource: "https://www.linkedin.com/in/antonygichoya/",
+      bio: "A software developer and Team Lead at MMUST iHub, specializing as a Backend & DevOps Engineer. Proficient in Golang and Python, I focus on building robust backend solutions and implementing efficient CI/CD pipelines for web and mobile applications. Passionate about delivering high-quality software and fostering innovation within my team.",
     },
     {
       name: "Michael Maina",
       img: img1,
-      role: "Project Developer Lead",
+      role: "Project Developer Lead || Frontend Developer",
+      portfolio: "https://michael-maina.me/",
       github: "https://github.com/Muchael123/",
       linkedin: "https://www.linkedin.com/in/michael-maina-087227235",
       twitter: "https://x.com/Maich_mgaza",
+      biosource: "https://www.linkedin.com/in/michael-maina-087227235",
+      bio: "I am a Software Developer and Project Lead at MMUST-iHub, specializing in frontend and mobile development. I utilize React and Next.js for web applications, while leveraging React Native for mobile development. My focus is on creating seamless and engaging user experiences across platforms. I am passionate about building innovative solutions that drive impact and empower communities.",
     },
     {
       name: "David Mwangi",
       img: img2,
-      role: "Technical Lead",
+      role: "Technical Lead || Frontend Developer",
+      portfolio: "https://david-mwas.me/",
       github: "https://github.com/David-mwas",
       linkedin: "https://ke.linkedin.com/in/david-mwas-a57186235",
       twitter: "https://x.com/DavidMwas2_0",
+      biosource: "https://ke.linkedin.com/in/david-mwas-a57186235",
+      bio: "As a Software Developer and Technical Lead at MMUST iHub, I specialize in Frontend Development with a strong proficiency in React and React Native. My focus is on creating user-friendly interfaces and scalable web applications. I am passionate about delivering seamless user experiences and fostering innovation within my team. With expertise in ReactJS, Next.js, Tailwind CSS, JavaScript, and Node.js, I craft responsive designs that enhance web experiences.",
     },
 
     {
       name: "Michael Joseph",
       img: img4,
-      role: "Events Organiser",
+      role: "Events, Bootcamps Organiser || Fullstack Developer",
+      portfolio: "https://mikiejoe.tech/",
       github: "https://github.com/Mikiejoe",
       linkedin: "https://www.linkedin.com/in/joseph-michael-445111235/",
       twitter: "https://x.com/omoshjoe02",
+      biosource: "https://mikiejoe.tech/",
+      bio: "As a Software Developer and Events Organizer at MMUST iHub, I’m an aspiring full-stack developer with a passion for building dynamic, user-centric web and mobile applications. My experience with Django, React, Flutter, and Node.js enables me to deliver seamless solutions, from intuitive front-end interfaces to robust back-end systems. Whether creating responsive websites, developing cross-platform mobile apps, or designing efficient APIs, I am committed to crafting innovative and impactful digital experiences.",
     },
     {
       name: "Josphine Gatwiri",
       img: img5,
-      role: "Treasurer",
+      role: "Lead Finance Manager || UI/UX Designer",
+      portfolio: "",
       github: "https://github.com/JosphineG",
       linkedin: "https://www.linkedin.com/in/josphinegatwiri27/",
       twitter: "https://x.com/angeljosphine34",
+      biosource: "https://www.linkedin.com/in/josphinegatwiri27/",
+      bio: "I am a UI/UX Designer dedicated to creating impactful digital solutions that enhance user experiences. As a Product and Web Designer, I focus on blending functionality with aesthetics to deliver user-centered designs. Currently, I serve as the Finance Manager at MMUST iHub and aspire to make a positive difference through philanthropy.",
     },
     {
       name: "Sebastian Chanzu",
       img: img6,
-      role: "Digital Marketing",
+      role: "Digital Marketing Lead || Data Scientist",
+      portfolio: "",
       github: "https://github.com/SebbieMzingKe",
       linkedin: "https://www.linkedin.com/in/sebbie-evayo-3249a9250/",
       twitter: "https://x.com/sebbiemzing",
+      biosource: "https://www.linkedin.com/in/sebbie-evayo-3249a9250/",
+      bio: "As a Data Analyst and Cloud Computing enthusiast, I currently serve as the Health IT Lead at MMUST and am part of the KamiLimu Cohort 8.0. Additionally, I work as a Digital Marketer at MMUST iHub, leveraging my skills in Data Science, Data Analysis, Cloud Computing, and Machine Learning to drive impactful initiatives.",
     },
     {
       name: "Valencia Neema",
       img: img7,
-      role: "Mentor",
+      role: "Lead Mentor || Data Scientist",
+      portfolio: "",
+      biosource: "https://www.linkedin.com/in/valencia-neema-162130287/",
       github: "https://github.com/lencemmust",
       linkedin: "https://www.linkedin.com/in/valencia-neema-162130287/",
       twitter: "https://x.com/neemavalencia",
+      bio: " I am a Lead Mentor at MMUST iHub, passionate about data science and machine learning. I am deeply intrigued by the possibilities of AI and its potential to transform industries.",
     },
   ];
-
+const truncateBio = (bio) => {
+  const maxLength = 350;
+  if (bio.length > maxLength) {
+    return `${bio.slice(0, maxLength)}... `;
+  }
+  return bio;
+};
   const openModal = (member) => {
     setSelectedMember(member);
     setIsModalOpen(true);
@@ -104,6 +131,15 @@ function OurTeam() {
                 <p className="font-semibold text-gray-500">{member.role}</p>
               </div>
               <div className="flex flex-row items-center text-center gap-6 text-secondary">
+                {member?.portfolio && (
+                  <a
+                    href={member.portfolio}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaLink className="hover:scale-125 hover:text-tersiary h-[20px] w-[20px] transition-all duration-300 ease-in-out" />
+                  </a>
+                )}
                 <a
                   href={member.twitter}
                   target="_blank"
@@ -137,26 +173,42 @@ function OurTeam() {
         </div>
 
         {isModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-85 flex items-center justify-center z-[999]">
-            <div className="bg-white rounded-lg p-6 max-w-sm w-full relative">
+          <div className="w-screen fixed inset-0 bg-black bg-opacity-85 flex items-center justify-center z-[99] overflow-y-auto">
+            <div className="bg-white rounded-lg p-6 max-w-lg w-full relative max-h-[90vh] mt-[220px]">
               <button
                 onClick={closeModal}
                 className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
               >
-                <FaTimes className="h-6 w-6" />
+                <FaTimes className="h-8 w-8" />
               </button>
               {selectedMember && (
-                <>
-                  <img
-                    src={selectedMember.img}
-                    alt={selectedMember.name}
-                    className="h-[150px] w-[150px] rounded-full mb-4 object-cover object-top shadow-xl shadow-secondary"
-                  />
-                  <h5 className="text-lg font-bold">{selectedMember.name}</h5>
-                  <p className="font-semibold text-gray-500">
-                    {selectedMember.role}
+                <div className="w-full justify-center items-center flex-col">
+                  <div className="flex flex-col w-full justify-center items-center mb-4">
+                    <img
+                      src={selectedMember?.img}
+                      alt={selectedMember?.name}
+                      className="animate-float h-[100px] w-[100px] md:h-[200px] md:w-[200px] rounded-full mb-4 object-cover object-top shadow-lg shadow-secondary mt-[-25%]"
+                    />
+                    <h5 className="text-2xl font-bold">
+                      {selectedMember?.name}
+                    </h5>
+                    <p className="font-semibold text-black text-lg">
+                      {selectedMember?.role}
+                    </p>
+                  </div>
+                  <p className="w-full text-black font-[500] text-base md:text-lg px-4">
+                    {truncateBio(selectedMember?.bio)}
+                    {selectedMember?.bio.length > 350 && (
+                      <a
+                        href={selectedMember?.biosource}
+                        className="text-blue-500 cursor-pointer"
+                        target="_blank"
+                      >
+                        read more
+                      </a>
+                    )}
                   </p>
-                </>
+                </div>
               )}
             </div>
           </div>
