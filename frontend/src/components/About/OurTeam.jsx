@@ -41,7 +41,7 @@ function OurTeam() {
     {
       name: "Michael Joseph",
       img: img4,
-      role: "Events Organiser",
+      role: "Events, Bootcamps Organiser",
       github: "https://github.com/Mikiejoe",
       linkedin: "https://www.linkedin.com/in/joseph-michael-445111235/",
       twitter: "https://x.com/omoshjoe02",
@@ -49,7 +49,7 @@ function OurTeam() {
     {
       name: "Josphine Gatwiri",
       img: img5,
-      role: "Treasurer",
+      role: "Finance Manager",
       github: "https://github.com/JosphineG",
       linkedin: "https://www.linkedin.com/in/josphinegatwiri27/",
       twitter: "https://x.com/angeljosphine34",

@@ -31,7 +31,7 @@ function Main() {
                 <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
-              <span className="truncate">Kakamega, Kenya</span>
+              <span className="truncate font-semibold">Kakamega, Kenya</span>
             </li>
             <li className="flex items-center space-x-2">
               <svg
@@ -83,33 +83,45 @@ function Main() {
             Feel Free to write to us
           </h3>
           <form action="" className="w-full flex flex-col gap-4">
+            <label htmlFor="name" className="font-semibold text-black">
+              Name
+            </label>
             <input
               type="text"
-              name=""
-              id=""
+              name="name"
+              id="name"
               className="text-black rounded-lg px-2 h-[40px] w-full outline-green-500 border-gray-400 border-[1px]"
               required
               placeholder="Name..."
             />
+            <label htmlFor="email" className="font-semibold text-black">
+              Email
+            </label>
             <input
               type="email"
-              name=""
-              id=""
+              name="email"
+              id="email"
               className="text-black rounded-lg px-2 h-[40px] w-full outline-green-500 border-gray-400 border-[1px]"
               required
               placeholder="Email..."
             />
+            <label htmlFor="phone" className="font-semibold text-black">
+              Phone Number
+            </label>
             <input
               type="tel"
-              name=""
-              id=""
+              name="phone"
+              id="phone"
               className="text-black rounded-lg px-2 h-[40px] w-full outline-green-500 border-gray-400 border-[1px]"
               required
               placeholder="Phone Number..."
             />
+            <label htmlFor="message" className="font-semibold text-black">
+              Message Us
+            </label>
             <textarea
-              name=""
-              id=""
+              name="message"
+              id="message"
               className="text-black rounded-lg px-2 h-[80px] w-full outline-green-500 border-gray-400 border-[1px]"
               required
               placeholder="Message..."
