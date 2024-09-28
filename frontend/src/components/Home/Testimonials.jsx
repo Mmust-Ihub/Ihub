@@ -45,13 +45,13 @@ function Testimonials() {
       },
     ],
   };
-  // console.log(import.meta.env.VITE_BACKENED_URL);
+  // console.log(import.meta.env.VITE_BACKEND_URL);
   const [testimonials, setTestimonials] = useState([]);
   const FetchTestimonials = async () => {
     setLoading(true);
     try {
       const response = await fetch(
-        ` ${import.meta.env.VITE_BACKENED_URL}/testimonials`,
+        ` ${import.meta.env.VITE_BACKEND_URL}/testimonials`,
         {
           method: "GET",
         }

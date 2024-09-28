@@ -1,17 +1,16 @@
 // LoginForm.js
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import Link for navigation
-  import { ToastContainer, toast } from "react-toastify";
-  import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import useAuthToken from "./AuthContext";
 
 const LoginForm = () => {
-
   const notify = (message) => toast.success(message);
   const errorNotify = (message) => toast.error(message);
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -22,17 +21,16 @@ const LoginForm = () => {
       window.location.href = "/admin/create-project";
     }
   }, []);
-  
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (email && password) {
       try {
         setLoading(true);
         console.log("running login");
         const response = await fetch(
-          `/${import.meta.env.VITE_BACKENED_URL}/auth/login`,
+          `/${import.meta.env.VITE_BACKEND_URL}/auth/login`,
           {
             method: "POST",
             headers: {
@@ -59,8 +57,8 @@ const LoginForm = () => {
         console.log(data);
 
         if (data.status === "success") {
-              localStorage.setItem("authToken", data?.accessToken);
-          updateAuthToken(data?.accessToken); 
+          localStorage.setItem("authToken", data?.accessToken);
+          updateAuthToken(data?.accessToken);
           navigate("/admin/create-project");
         }
       } catch (err) {
@@ -72,7 +70,7 @@ const LoginForm = () => {
       setError("Please enter both email and password"); // Updated error message
     }
   };
-  
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <ToastContainer />

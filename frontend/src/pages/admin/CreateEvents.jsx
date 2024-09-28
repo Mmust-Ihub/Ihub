@@ -13,9 +13,9 @@ const CreateEvents = () => {
     event_link: "",
     image: null,
   });
-  const [loading, setLoading] = useState(false)
-  const notify = (message) => toast.success(message)
-  const errNotify = (message) => toast.error(message)
+  const [loading, setLoading] = useState(false);
+  const notify = (message) => toast.success(message);
+  const errNotify = (message) => toast.error(message);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,7 +27,7 @@ const CreateEvents = () => {
   };
 
   const handleSubmit = async (e) => {
-    setLoading(true)
+    setLoading(true);
     e.preventDefault();
     const form = new FormData();
     form.append("title", formData.title);
@@ -40,14 +40,17 @@ const CreateEvents = () => {
     form.append("end_date", formData.end_date);
 
     try {
-      notify("Loading")
-      const response = await fetch(`${import.meta.env.VITE_BACKENED_URL}/events`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-        },
-        body: form,
-      });
+      notify("Loading");
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/events`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+          body: form,
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to create event");
@@ -56,19 +59,17 @@ const CreateEvents = () => {
       const data = await response.json();
       console.log("Event created successfully:", data);
       notify("Event created successfully!");
-
     } catch (error) {
-      errNotify("An error occured. Try again")
+      errNotify("An error occured. Try again");
       console.error("Error creating event:", error);
-    }
-    finally {
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="flex justify-center p-5  pt-20 bg-gray-100">
-      <ToastContainer/>
+      <ToastContainer />
       <form
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded shadow-md w-full max-w-md"

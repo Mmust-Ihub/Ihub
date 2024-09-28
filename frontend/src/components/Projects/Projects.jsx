@@ -9,7 +9,7 @@ function Projects() {
     setLoading(true);
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKENED_URL}/projects`,
+        `${import.meta.env.VITE_BACKEND_URL}/projects`,
         {
           method: "GET",
         }

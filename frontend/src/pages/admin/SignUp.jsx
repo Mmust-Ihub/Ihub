@@ -23,7 +23,7 @@ const SignUp = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKENED_URL}/auth/register`,
+        `${import.meta.env.VITE_BACKEND_URL}/auth/register`,
         {
           method: "POST",
           headers: {
