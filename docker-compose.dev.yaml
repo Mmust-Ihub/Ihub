@@ -49,7 +49,7 @@ services:
 
   mongodb:
     restart: always
-    image: mongo
+    image: mongo:4.4.18
     container_name: mongo-cont
     ports:
       - "27017:27017"
@@ -75,7 +75,7 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGODB_USER}
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_PASSWORD}
       ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_MONGODB_backend: mongodb
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@mongo:27017/
     depends_on:
       - mongodb
     stdin_open: true
