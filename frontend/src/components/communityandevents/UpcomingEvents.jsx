@@ -2,40 +2,35 @@ import React, { useEffect, useState } from 'react'
 import Card from "./Card";
 import robot from "../../assets/communityandevent/robot.webp";
 import { toast, ToastContainer } from 'react-toastify';
+import Loading from '../common/Loading';
 function UpcomingEvents() {
   const [Events, setEvents] = useState([]);
-  const [page, setPage] = useState(0); // Current page
-  const [perPage, setPerPage] = useState(6); // Number of events per page
-  const [totalEvents, setTotalEvents] = useState(0); // To track total number of events
+  const [totalEvents, setTotalEvents] = useState(0);
   const [loading, setLoading] = useState(false);
   const Errnotify = (message) => toast.error(message);
 
   useEffect(() => {
-    FetchEvents(page, perPage); 
-  }, [page, perPage]);
+    FetchEvents(); 
+  }, []);
 
-  const FetchEvents = async (page = 0, perPage = 6) => {
+  const FetchEvents = async () => { 
     setLoading(true);
     try {
-      const res = await fetch(
-        `${
-          import.meta.env.VITE_BACKENED_URL
-        }/events/upcoming?page=${page}&perPage=${perPage}`,
-        {
-          method: "GET",
-        }
-      );
-      const data = await res.json();
-      setEvents(data.events); // Assuming the events come in a key `events`
-      setTotalEvents(data.total); // Assuming the total number of events is returned in a `total` field
-    } catch (e) {
-      Errnotify("Failed to fetch Upcoming events. Reload");
-    }finally{
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/events/upcoming`);
+      const data = await response.json();
+      console.log(data);
+      if (!response.ok) {
+        Errnotify("Failed to fetch events");
+        return;
+      }
+      setEvents(data);
+    } catch (error) {
+      Errnotify("Failed to fetch events");
+    } finally {
       setLoading(false);
     }
-  };
+  }
 
-  // Convert ISO date format to a readable date format
   const convertISOToNormal = (isoDateString) => {
     const date = new Date(isoDateString);
     const year = date.getFullYear();
@@ -46,18 +41,7 @@ function UpcomingEvents() {
     return `${day}/${month}/${year} @${hours}:${minutes}`;
   };
 
-  // Handle page navigation
-  const handleNextPage = () => {
-    if (page * perPage < totalEvents) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (page > 1) {
-      setPage((prevPage) => prevPage - 1);
-    }
-  };
+  
 
   return (
     <div>
@@ -74,7 +58,7 @@ function UpcomingEvents() {
       </p>
 
       {loading ? (
-        <p>Loading...</p>
+        <Loading text={"Loading Upcoming Events"} />
       ) : (
         <div>
           {Events?.length > 0 ? (
@@ -100,29 +84,7 @@ function UpcomingEvents() {
               No Upcoming events available at the moment.
             </p>
           )}
-          {page > 0 && (
-            <div className="w-full justify-between flex flex-row">
-              <button
-                className="text-tersiary underline underline-offset-1"
-                onClick={() => {
-                  if (page > 0) setPage((prev) => prev - 1);
-                }}
-              >
-                Previous
-              </button>
-              {Events.length > perPage - 1 && (
-                <button
-                  className="text-tersiary underline underline-offset-1"
-                  onClick={() => {
-                    if (page > 0) setPage((prev) => prev - 1);
-                  }}
-                >
-                  {" "}
-                  Next
-                </button>
-              )}
-            </div>
-          )}
+         
         </div>
       )}
     </div>
