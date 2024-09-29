@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Loading from "../common/Loading";
 
 function Testimonials() {
   const [loading, setLoading] = useState(false);
@@ -45,13 +46,13 @@ function Testimonials() {
       },
     ],
   };
-  // console.log(import.meta.env.VITE_BACKENED_URL);
+  // console.log(import.meta.env.VITE_BACKEND_URL);
   const [testimonials, setTestimonials] = useState([]);
   const FetchTestimonials = async () => {
     setLoading(true);
     try {
       const response = await fetch(
-        ` ${import.meta.env.VITE_BACKENED_URL}/testimonials`,
+        ` ${import.meta.env.VITE_BACKEND_URL}/testimonials`,
         {
           method: "GET",
         }
@@ -77,12 +78,7 @@ function Testimonials() {
       </h2>
 
       {loading ? (
-        <div className="flex flex-col justify-center items-center">
-          <img src={"/loading.gif"} alt="loading" className="w-24 h-24" />
-          <p className="w-full text-center text-secondary text-xl">
-            Loading testimonials...
-          </p>
-        </div>
+        <Loading text={"Loading Testimonials"} />
       ) : (
         <Slider {...settings}>
           {testimonials?.map((testimonial, index) => (

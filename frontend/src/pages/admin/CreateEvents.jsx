@@ -13,9 +13,9 @@ const CreateEvents = () => {
     event_link: "",
     image: null,
   });
-  const [loading, setLoading] = useState(false)
-  const notify = (message) => toast.success(message)
-  const errNotify = (message) => toast.error(message)
+  const [loading, setLoading] = useState(false);
+  const notify = (message) => toast.success(message);
+  const errNotify = (message) => toast.error(message);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,27 +27,34 @@ const CreateEvents = () => {
   };
 
   const handleSubmit = async (e) => {
-    setLoading(true)
+    setLoading(true);
     e.preventDefault();
+
+    // Create a FormData object to handle the form data and file upload
     const form = new FormData();
     form.append("title", formData.title);
     form.append("short_description", formData.short_description);
     form.append("long_description", formData.long_description);
     form.append("start_date", formData.start_date);
-    form.append("tags", formData.tags.split(","));
-    form.append("event_link", formData.event_link);
-    form.append("image", formData.image);
     form.append("end_date", formData.end_date);
+    form.append("event_link", formData.event_link);
+    form.append("image", formData.image); 
+    formData.tags.split(",").forEach((tag) => {
+      form.append("tags[]", tag.trim()); // Trim to remove extra spaces
+    });
 
     try {
-      notify("Loading")
-      const response = await fetch(`${import.meta.env.VITE_BACKENED_URL}/events`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-        },
-        body: form,
-      });
+      notify("Loading");
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/events`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+          body: form,
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to create event");
@@ -56,19 +63,18 @@ const CreateEvents = () => {
       const data = await response.json();
       console.log("Event created successfully:", data);
       notify("Event created successfully!");
-
     } catch (error) {
-      errNotify("An error occured. Try again")
+      errNotify("An error occured. Try again");
       console.error("Error creating event:", error);
-    }
-    finally {
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
+
   return (
     <div className="flex justify-center p-5  pt-20 bg-gray-100">
-      <ToastContainer/>
+      <ToastContainer />
       <form
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded shadow-md w-full max-w-md"
@@ -121,6 +127,7 @@ const CreateEvents = () => {
             id="long_description"
             name="long_description"
             value={formData.long_description}
+            minLength={25}
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
             required
@@ -137,13 +144,17 @@ const CreateEvents = () => {
             id="start_date"
             name="start_date"
             value={formData.start_date}
-            onChange={handleChange}
+            onChange={(e) => {
+              handleChange(e);
+              setIsStartDate(true)
+            }}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
             required
           />
         </div>
         {/* End Date */}
-        <div className="mb-4">
+        {isStastDate && (
+          <div className="mb-4">
           <label className="block text-gray-700 mb-2" htmlFor="end_date">
             End Date
           </label>
@@ -153,10 +164,11 @@ const CreateEvents = () => {
             name="end_date"
             value={formData.end_date}
             onChange={handleChange}
+            min={formData.start_date}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
             required
           />
-        </div>
+        </div>)}
 
         {/* Tags */}
         <div className="mb-4">
