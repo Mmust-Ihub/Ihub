@@ -27,6 +27,7 @@ function PrevEvents() {
       }
       setEvents(data);
     } catch (error) {
+      console.log(error)
       Errnotify("Failed to fetch events");
     } finally {
       setLoading(false);

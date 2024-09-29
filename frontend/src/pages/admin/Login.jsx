@@ -28,7 +28,6 @@ const LoginForm = () => {
     if (email && password) {
       try {
         setLoading(true);
-        console.log("running login");
         const response = await fetch(
           `/${import.meta.env.VITE_BACKEND_URL}/auth/login`,
           {
@@ -39,7 +38,6 @@ const LoginForm = () => {
             body: JSON.stringify({ email, password }),
           }
         );
-        notify("Successfully logged in");
 
         if (!response.ok) {
           if (response.status === 401) {
@@ -50,16 +48,16 @@ const LoginForm = () => {
             errorNotify("Server error. Try again later");
             setError("Server error. Try again later");
           }
-          console.log(response); // You can customize the error message based on the response
         }
 
         const data = await response.json();
-        console.log(data);
+        
 
         if (data.status === "success") {
           localStorage.setItem("authToken", data?.accessToken);
           updateAuthToken(data?.accessToken);
           navigate("/admin/create-project");
+        notify("Successfully logged in");
         }
       } catch (err) {
         setError(err.message); // Set the error message to be displayed

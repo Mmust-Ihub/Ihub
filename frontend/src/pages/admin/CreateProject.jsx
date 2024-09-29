@@ -58,7 +58,7 @@ const CreateProject = () => {
 
       const result = await response.json();
       toast.success("Project created successfully!");
-      console.log(result);
+      
       window.location.href = "/projects";
     } catch (error) {
       toast.error("There was a problem with the submission.");

@@ -14,12 +14,7 @@ const SignUp = () => {
   const [confirm_password, set_confirm_password] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("User registered:", {
-      username,
-      email,
-      password,
-      confirm_password,
-    });
+    
 
     try {
       const response = await fetch(
@@ -33,16 +28,14 @@ const SignUp = () => {
         }
       );
 
-      console.log(response, "response");
 
       if (!response.ok) {
         errorNotify("An error occurred. Try again");
-        console.log(response); // Log the error for debugging
         return;
       }
 
       const data = await response.json();
-      console.log(data);
+      
 
       if (data.token) {
         notify("Successfully registered");
@@ -53,7 +46,6 @@ const SignUp = () => {
       }
     } catch (e) {
       errorNotify("Network error. Check your connection");
-      console.log(e); // Log the error for debugging
     }
   };
 
