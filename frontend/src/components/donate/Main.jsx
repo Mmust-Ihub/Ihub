@@ -53,7 +53,7 @@ function Main() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKENED_URL}/donate/mpesa`,
+        `${import.meta.env.VITE_BACKEND_URL}/donate/mpesa`,
         {
           method: "POST",
           headers: {
@@ -94,7 +94,6 @@ function Main() {
       setMpesaNumber("");
     }
   };
-
 
   return (
     <div className="w-screen pb-[220px] flex flex-col justify-center items-center px-4 lg:px-24 py-8">

@@ -1,59 +1,66 @@
 #! /bin/bash
 
-: '..... CONSTANTS ....'
-COMPOSE_FILE="docker-compose.yaml"
-CONTAINER_PREFIX="ihub"
+: '---- CONSTANTS ----'
+COMPOSE_FILE="docker-compose.dev.yaml"
+CONTAINER_PREFIX="ihub-"
+REMOTE_URL="git@github.com:Mmust-Ihub/Ihub.git"
+BRANCH="main"
+IHUB_PATH=~/NEW-IHUB/Ihub
 
-is_container_running() {
-    local container_name="$1"
-    docker ps --format '{{.Names}}' | grep -q "^${container_name}$"
+set -e
+
+# change path to the ihub working dir
+function change_path(){
+    cd $IHUB_PATH || exit
+    echo "This is the current working dir: $IHUB_PATH"
 }
 
-function remove_existing_containers() {
-    echo "removing existing containers ..."
-
-    if is_container_running "${CONTAINER_PREFIX}server"; then
-        docker stop "${CONTAINER_PREFIX}server"
-    fi
-
-    # get all the containers that matches the container prefix and stop them
-    docker ps -a --format '{{.Names}}' | grep "^${CONTAINER_PREFIX}" | xargs -r docker stop
-
-    # remove all the stopped containers
-    docker ps -a --format '{{.Names}}' | grep "^${CONTAINER_PREFIX}" | xargs -r docker rm
-    docker container prune -f
+# pull the latest changes from remote url
+function pull_latest_changes() {
+    echo "Pulling latest changes from the ${BRANCH} branch..."
+    git pull origin ${BRANCH}
 }
 
-
-function deploy() {
-    remove_existing_containers
-
-    echo "Finally!. Your application is ready for deployment .."
-
-    docker compose -f $COMPOSE_FILE up -d --build
-}
-
-function main() {
-
+function check_docker_is_running(){
     if ! command docker >/dev/null 2>&1 || ! command -v docker compose &>/dev/null; then
-        echo -e "Ensure docker and docker compose is installed on your system \nExiting ...."
+        echo -e "Ensure docker and docker compose are installed on your system and running.\nExiting ...."
         exit 1
 
     else
         echo "Confirmed! docker is installed on your system ..."
-        if [ ! -f "$COMPOSE_FILE" ]; then
-            echo -e "Docker Compose file '$DOCKER_COMPOSE_FILE' not found.\n Exiting..."
-            exit 1
+    fi
+}
 
-        else
-            # finally deploy the application
-            echo "Deploying your application in a few ..."
-            deploy
+# stop the existing containers
+function stop_running_containers() {
+    echo "Stopping the running containers ..."
 
-        fi
+    docker ps -a --format '{{.Names}}' | grep "^${CONTAINER_PREFIX}" | xargs -r docker stop
 
+    # remove all the stopped containers
+    docker ps -a --format '{{.Names}}' | grep "^${CONTAINER_PREFIX}" | xargs -r docker rm
+    echo "removed the old containers ..."
+}
+
+function deploy() {
+    if [ ! -f "$COMPOSE_FILE" ]; then
+        echo -e "Docker Compose file '$COMPOSE_FILE' not found.\n Exiting..."
+        exit 1
+
+    else
+        # finally deploy the application
+        echo "Finally!. Your application is ready for deployment ..."
+        docker compose -f ${COMPOSE_FILE} up -d --build
     fi
 
+}
+
+function main() {
+    change_path
+    pull_latest_changes
+    check_docker_is_running
+    stop_running_containers
+    deploy
 }
 
 main
