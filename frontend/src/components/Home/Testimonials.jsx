@@ -63,7 +63,6 @@ function Testimonials() {
       console.log(error);
     } finally {
       setLoading(false);
-      console.log("Testimonials fetched successfully");
     }
   };
   const [readMore, setReadMore] = useState(0);

@@ -3,7 +3,7 @@ import sponser1 from "../../assets/webp/mmustlogo.webp";
 import sponser2 from "../../assets/webp/konza.webp";
 import sponser3 from "../../assets/webp/SWOM.webp";
 function Sponser() {
-  console.log();
+  
   const Sponsers = [
     { id: 1, url: "https://mmust.ac.ke", img: sponser1 },
     { id: 2, url: "https://konza.go.ke", img: sponser2 },
