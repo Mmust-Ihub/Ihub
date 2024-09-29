@@ -14,9 +14,11 @@ function UpcomingEvents() {
   }, []);
 
   const FetchEvents = async () => { 
+    console.log(`${import.meta.env.VITE_BACKEND_URL}/events/upcoming`);
     setLoading(true);
     try {
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/events/upcoming`);
+      
       const data = await response.json();
       console.log(data);
       if (!response.ok) {
