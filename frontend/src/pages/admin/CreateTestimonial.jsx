@@ -30,7 +30,6 @@ function CreateTestimonial() {
     for (const key in formData) {
       data.append(key, formData[key]);
     }
-    console.log(data);
 
     try {
       const response = await fetch(
@@ -45,7 +44,6 @@ function CreateTestimonial() {
         }
       );
       const result = await response.json();
-      console.log(result);
     } catch (error) {
       console.error(error);
     }

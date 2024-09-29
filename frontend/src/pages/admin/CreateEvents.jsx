@@ -61,7 +61,6 @@ const CreateEvents = () => {
       }
 
       const data = await response.json();
-      console.log("Event created successfully:", data);
       notify("Event created successfully!");
     } catch (error) {
       errNotify("An error occured. Try again");
