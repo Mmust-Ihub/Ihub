@@ -121,12 +121,12 @@ function Main() {
               id="email"
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter Email..."
-              className="px-4 py-2 rounded-md outline-none border-tersiary border-[3px] placeholder:text-black/75"
+              className="px-4 py-2 rounded-md outline-none border-tersiary border-[2px] placeholder:text-black/75"
             />
             <label htmlFor="mpesaNumber" className="font-semibold text-black">
               Mpesa Phone Number
             </label>
-            <div className="flex flex-row items-center w-full px-4 py-2 rounded-md outline-none border-tersiary border-[3px]">
+            <div className="flex flex-row items-center w-full px-4 py-2 rounded-md outline-none border-tersiary border-[2px]">
               <span className="border-r-2 px-2 border-tersiary text-tersiary">
                 254
               </span>
@@ -158,7 +158,7 @@ function Main() {
               onChange={(e) => setAmount(e.target.value)}
               placeholder="Amount..."
               min={0}
-              className="px-4 py-2 rounded-md outline-none border-tersiary border-[3px] placeholder:text-black/75"
+              className="px-4 py-2 rounded-md outline-none border-tersiary border-[2px] placeholder:text-black/75"
             />
             <div className="w-full">
               <input
@@ -194,7 +194,7 @@ function Main() {
                   name="firstname"
                   id="firstname"
                   placeholder="First Name..."
-                  className="px-4 py-2 rounded-md outline-none border-tersiary border-[3px] placeholder:text-black/75"
+                  className="px-4 py-2 rounded-md outline-none border-tersiary border-[2px] placeholder:text-black/75"
                 />
               </div>
               <div className="w-full flex flex-col">
@@ -207,7 +207,7 @@ function Main() {
                   name="lastname"
                   id="lastname"
                   placeholder="Last Name..."
-                  className="px-4 py-2 rounded-md outline-none border-tersiary border-[3px] placeholder:text-black/75"
+                  className="px-4 py-2 rounded-md outline-none border-tersiary border-[2px] placeholder:text-black/75"
                 />
               </div>
               <div className="w-full flex flex-col">
@@ -221,7 +221,7 @@ function Main() {
                   id="userEmail"
                   onChange={(e) => setUserEmail(e.target.value)}
                   placeholder="Enter Email..."
-                  className="px-4 py-2 rounded-md outline-none border-tersiary border-[3px] placeholder:text-black/75"
+                  className="px-4 py-2 rounded-md outline-none border-tersiary border-[2px] placeholder:text-black/75"
                 />
               </div>
               <div className="w-full flex flex-col">
@@ -237,7 +237,7 @@ function Main() {
                   name="phonenumber"
                   id="phonenumber"
                   placeholder="Phone Number..."
-                  className="px-4 py-2 rounded-md outline-none border-tersiary border-[3px] placeholder:text-black/75"
+                  className="px-4 py-2 rounded-md outline-none border-tersiary border-[2px] placeholder:text-black/75"
                 />
               </div>
             </div>
@@ -249,7 +249,7 @@ function Main() {
                 name="message"
                 id="message"
                 placeholder="Message..."
-                className="px-4 py-2 rounded-md outline-none border-tersiary border-[3px] placeholder:text-black/75 h-[160px]"
+                className="px-4 py-2 rounded-md outline-none border-tersiary border-[2px] placeholder:text-black/75 h-[160px]"
               ></textarea>
             </div>
             <div className="w-full">
