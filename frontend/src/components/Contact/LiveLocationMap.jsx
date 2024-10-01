@@ -1,5 +1,5 @@
 import React from "react";
-import map from "../../assets/contact/image.webp";
+// import map from "../../assets/contact/image.webp";
 
 function LiveLocationMap() {
   return (
