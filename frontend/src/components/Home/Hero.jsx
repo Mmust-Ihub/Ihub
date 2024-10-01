@@ -32,7 +32,7 @@ function Hero() {
             future and transform ideas into reality.
           </p>
           <motion.a
-            href="/donate"
+            href="/membership"
             className="bg-secondary px-[60px] text-center py-2 rounded-[60px] text-white font-[500] hover:opacity-75 mt-[20px] w-full 
             lg:w-[50%] shadow-xl"
             initial={{ x: "-100%", opacity: 0 }}
