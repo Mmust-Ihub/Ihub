@@ -13,6 +13,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const toastLoading = (message) => toast.loading(message);
 
   const { updateAuthToken, getItem } = useAuthToken();
   const { token } = getItem();
@@ -21,15 +22,15 @@ const LoginForm = () => {
       window.location.href = "/admin/create-project";
     }
   }, []);
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (email && password) {
       try {
         setLoading(true);
+        toastLoading("Logging in...");
         const response = await fetch(
-          `/${import.meta.env.VITE_BACKEND_URL}/auth/login`,
+          `${import.meta.env.VITE_BACKEND_URL}/auth/login`,
           {
             method: "POST",
             headers: {
@@ -64,6 +65,8 @@ const LoginForm = () => {
         setError(err.message); // Set the error message to be displayed
       } finally {
         setLoading(false);
+        toast.dismiss();
+        toast.info("Login successful");
       }
     } else {
       setError("Please enter both email and password"); // Updated error message
@@ -73,7 +76,6 @@ const LoginForm = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <ToastContainer />
-      {loading && <p>Loading...</p>}
 
       <form
         onSubmit={handleSubmit}
@@ -113,6 +115,7 @@ const LoginForm = () => {
 
         <button
           type="submit"
+          disabled={loading}
           className="w-full bg-primary text-white py-2 rounded hover:bg-tertiary transition duration-200"
         >
           Login
