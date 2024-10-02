@@ -8,7 +8,7 @@ const FocusProjects = () => {
   const { project } = useParams();
   const [loading, setLoading] = useState(true);
   const [projects, setProjects] = useState([]);
-  console.log(project)
+  
   useEffect(() => {
     project && FetchProjects();
   }, []);
@@ -21,7 +21,6 @@ const FocusProjects = () => {
       );
       const data = await response.json();
       
-      console.log(data);
     } catch (error) {
       console.log(error);
     } finally
