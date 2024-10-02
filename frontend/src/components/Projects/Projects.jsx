@@ -1,47 +1,78 @@
-import React, { useEffect, useState } from "react";
-import ProjectCard from "./ProjectCard";
+import React from 'react'
+import { GrMoney } from "react-icons/gr";
+import { GiTeacher } from "react-icons/gi";
+import { PiPlantBold } from "react-icons/pi";
+import { FaHandHoldingMedical } from "react-icons/fa6";
+import { FaCloudSunRain } from "react-icons/fa6";
+import { SiHiveBlockchain } from "react-icons/si";
+import { GiBrain } from "react-icons/gi";
+import { IoGameController } from "react-icons/io5";
+import FocusCard from './FocusCard';
+
+const FocusArea = [
+  {
+    icon: GrMoney,
+    title: "Fintech",
+    link: "/projects/fintech",
+  },
+  {
+    icon: GiTeacher,
+    title: "Edtech",
+    link: "/projects/edtech",
+  },
+  {
+    icon: PiPlantBold,
+    title: "AgriTech",
+    link: "/projects/agritech",
+  },
+  {
+    icon: FaHandHoldingMedical,
+    title: "HealthTech",
+    link: "/projects/healthtech",
+  },
+  {
+    icon: FaCloudSunRain,
+    title: "ClimateTech",
+    link: "/projects/climatetech",
+  },
+  {
+    icon: SiHiveBlockchain,
+    title: "Blockchain",
+    link: "/projects/blockchain",
+  },
+  {
+    icon: GiBrain,
+    title: "AI/ML",
+    link: "/projects/ai-ml",
+  },
+  {
+    icon: IoGameController,
+    title: "Gaming",
+    link: "/projects/gaming",
+  },
+];
 
 function Projects() {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const FetchProjects = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/projects`,
-        {
-          method: "GET",
-        }
-      );
-      const data = await response.json();
-      setProjects(data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  useEffect(() => {
-    FetchProjects();
-  }, []);
-
   return (
-    <div className="w-screen px-6 md:px-12 lg:px-20 py-8">
-      <h2 className="text-secondary w-full text-start  font-bold text-3xl mt-6 mb-8">
-        Our Projects
-      </h2>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          projects.map((project, index) => {
-            return <ProjectCard key={index} project={project} />;
-          })
-        )}
+    <div className="py-7">
+      <div className="flex flex-col items-center mt-10">
+        <h1 className="lg:text-4xl md:text-2xl text-xl font-bold text-gray-800">
+          Areas of focus
+        </h1>
+        <p className='mt-2'>Explore our project Categories</p>
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-1'>
+          {FocusArea.map((focus, index) => (
+            <FocusCard
+              key={index}
+              icon={focus.icon}
+              title={focus.title}
+              link={focus.link}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
-export default Projects;
+export default Projects
