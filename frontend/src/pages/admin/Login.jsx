@@ -41,6 +41,7 @@ const LoginForm = () => {
         );
 
         if (!response.ok) {
+          toast.dismiss();
           if (response.status === 401) {
             errorNotify("Invalid email or password");
             setError("Invalid email or password");
@@ -52,21 +53,20 @@ const LoginForm = () => {
         }
 
         const data = await response.json();
-        
-
         if (data.status === "success") {
           localStorage.setItem("authToken", data?.accessToken);
+          toast.dismiss();
+          notify("Successfully logged in");
           updateAuthToken(data?.accessToken);
           navigate("/admin/create-project");
-        notify("Successfully logged in");
+        
         }
       } catch (err) {
         console.log(err);
-        setError(err.message); // Set the error message to be displayed
+        setError(err.message); 
       } finally {
         setLoading(false);
-        toast.dismiss();
-        toast.info("Login successful");
+        
       }
     } else {
       setError("Please enter both email and password"); // Updated error message
