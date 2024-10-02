@@ -63,7 +63,9 @@ function Projects() {
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-1'>
           {FocusArea.map((focus, index) => (
             <FocusCard
+              
               key={index}
+              delay={index*100}
               icon={focus.icon}
               title={focus.title}
               link={focus.link}
