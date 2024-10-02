@@ -13,9 +13,19 @@ exports.registerSchema = joi.object({
 
 exports.projectSchema = joi.object({
   title: joi.string().min(3).required(),
-  headline: joi.string().min(10).required(),
   description: joi.string().min(20).required(),
-  category: joi.string().valid("web", "android", "machine", "artificial", "blockchain", "robotics", "iot"),
+  category: joi.array().items(joi.string().valid(
+    "fintech",
+    "edutech",
+    "agritech",
+    "cybersecurity",
+    "healthtech",
+    "blockchain",
+    "climatetech",
+    "egovernment",
+    "ai-ml",
+    "iot",
+  )),
 })
 
 exports.testimonialSchema = joi.object({

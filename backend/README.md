@@ -296,62 +296,22 @@
 - request body:
   ```json
   "title": "title for the project",
-  "headline": "The brief project description that will be desplayed to the user",
   "description": "The body of the project",
-  "category": "any of the following [web, android, machine, artificial, blockchain, robotics, iot]",
-  "image": "image file for the blog"
+  "category": "any of the following [fintech,edutech,agritech,cybersecurity, healthtech,blockchain,climatetech,egovernment,ai-ml,iot]",
+  "image": "image file for the project"
   ```
   > **Response**
 - status code: `201`
 - response body:
   ```json
-  "title": "This is a simple project"
-  "slug": "This-is-a-simple-project"
-  "headline": "This is the headline of the this web project"
-  "description": "This is the body that explains everything about the project",
-  "image": "https://res.cloudinary.com/dlio7cpjo/image/upload/v1725631396/mmust-ihub/xxyf52f4xx98eaz7vhae.png"
-  ```
-
-## Get projects (with pagination features)
-
-> **request**
-
-- **_url_**: `{{dev_base_url}}/api/v1/projects`
-- **_method:_** `GET`
-
-- **_Headers:_**
-
-  - `Content-Type: application/json`
-
-- **_Optional query parameters:_**
-
-| Parameter |  Type   | Default |
-| :-------: | :-----: | :-----: |
-|   page    | integer |    0    |
-|  perPage  | integer |    5    |
-
-> **Response**
-
-- status code: `200`
-- response body:
-  ```json
-  [
-    {
-      "title": "This is a simple project",
-      "slug": "This-is-a-simple-project",
-      "headline": "This is the headline of the this web project",
-      "description": "This is the body that explains everything about the project",
-      "category": "machine",
-      "imageUrl": "https://res.cloudinary.com/dlio7cpjo/image/upload/,v1725631396/mmust-ihub/xxyf52f4xx98eaz7vhae.png"
-    }
-  ]
+  "message": "project created successfully"
   ```
 
 ## Get projects in a specific category (with pagination features)
 
 > **request**
 
-- **_url_**: `{{dev_base_url}}/api/v1/projects/category`
+- **_url_**: `{{dev_base_url}}/api/v1/projects/{category}`
 - **_method:_** `GET`
 
 - **_Headers:_**
@@ -362,7 +322,6 @@
 
 | Parameter |  Type   | Default |
 | :-------: | :-----: | :-----: |
-| category  | string  |   web   |
 |   page    | integer |    0    |
 |  perPage  | integer |    5    |
 
@@ -374,38 +333,8 @@
   [
     {
       "title": "This is a simple project",
-      "slug": "This-is-a-simple-project",
-      "headline": "This is the headline of the this web project",
       "description": "This is the body that explains everything about the project",
-      "category": "web",
-      "imageUrl": "https://res.cloudinary.com/dlio7cpjo/image/upload/,v1725631396/mmust-ihub/xxyf52f4xx98eaz7vhae.png"
-    }
-  ]
-  ```
-
-## Get a single project
-
-> **request**
-
-- **_url_**: `{{dev_base_url}}/api/v1/projects/{slug}`
-- **_method:_** `GET`
-
-- **_Headers:_**
-
-  - `Content-Type: application/json`
-
-> **Response**
-
-- status code: `200`
-- response body:
-  ```json
-  [
-    {
-      "title": "This is a simple project",
-      "slug": "This-is-a-simple-project",
-      "headline": "This is the headline of the this web project",
-      "description": "This is the body that explains everything about the project",
-      "category": "web",
+      "category": ["fintech", "edutech"],
       "imageUrl": "https://res.cloudinary.com/dlio7cpjo/image/upload/,v1725631396/mmust-ihub/xxyf52f4xx98eaz7vhae.png"
     }
   ]
