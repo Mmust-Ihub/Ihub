@@ -60,6 +60,7 @@ const LoginForm = () => {
         notify("Successfully logged in");
         }
       } catch (err) {
+        console.log(err);
         setError(err.message); // Set the error message to be displayed
       } finally {
         setLoading(false);
