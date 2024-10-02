@@ -10,7 +10,6 @@ function Card({
   tags,
   short_description,
 }) {
-  console.log(tags, event_link);
   return (
     <div className="rounded-lg flex flex-col justify-between flex-1 max-w-[350px] w-fit border-[2px] border-gray-300">
       <img className="w-full rounded-t-lg object-cover" src={image} alt="" />
