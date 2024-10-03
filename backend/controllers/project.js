@@ -5,6 +5,7 @@ const { userModel } = require("../models/userModel");
 const { uploadImage } = require("../utils/uploadImage");
 
 exports.createProject = async (req, res, next) => {
+console.log(req.body)
   try {
     const body = req.body
     const result = projectSchema.validate(body);
@@ -24,6 +25,7 @@ exports.createProject = async (req, res, next) => {
       message: "project created successfully",
     });
   } catch (error) {
+    console.log(error)
     next(error);
   }
 };
