@@ -122,23 +122,21 @@ const CreateProject = () => {
 
           {/* Category */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block p-4 font-medium text-gray-700">
               Category
             </label>
             <select
               name="category"
               value={project.category}
               onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-1 block p-2  w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 "
               required
             >
-              <option value="">Select Category</option>
-              <option value="web">Web</option>
-              <option value="android">Android</option>
-              <option value="machine">Machine Learning</option>
-              <option value="artificial">Artificial Intelligence</option>
-              <option value="blockchain">Blockchain</option>
-              <option value="robotics">Robotics</option>
+              <option value="fintech">Fin tech</option>
+              <option value="edtech">Ed Tech</option>
+              <option value="agritech">Agri Tech</option>
+              <option value="healthtech">Health Tech</option>
+              <option value="ai-ml">AI / ML</option>
               <option value="iot">IoT</option>
             </select>
           </div>
