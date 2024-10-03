@@ -7,7 +7,6 @@ const { uploadImage } = require("../utils/uploadImage");
 exports.createProject = async (req, res, next) => {
   try {
     const body = req.body
-    body.category = await JSON.parse(body.category).category;
     const result = projectSchema.validate(body);
     if (result?.error) {
       const error = result.error.details[0].message;
