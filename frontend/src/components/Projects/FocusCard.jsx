@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function FocusCard({ icon: Icon, title, link, delay }) {
-    console.log(delay)
+    
   return (
     <Link
       to={link}
