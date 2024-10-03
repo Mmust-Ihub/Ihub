@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
 import { useEffect, useState } from "react";
@@ -49,7 +49,11 @@ const FocusProjects = () => {
                     key={proj.title}
                     className="bg-slate-100 hover:scale-105 transition-all gap-4 p-4 h-fit rounded-lg w-full flex flex-col md:flex-row shadow-lg"
                   >
-                    <img className="h-[200px] rounded-lg object-cover" src={proj.imageUrl[0]} alt="" />
+                    <img
+                      className="h-[200px] rounded-lg object-cover"
+                      src={proj.imageUrl[0]}
+                      alt=""
+                    />
 
                     <div>
                       <h1 className="text-xl font-bold text-gray-800">
@@ -60,8 +64,28 @@ const FocusProjects = () => {
                   </div>
                 ))
               ) : (
-                <p className="text-gray-600">No projects found.</p> // Handle case with no projects
+                <div className="h-screen w-scren justify-start  flex">
+                  <div className="flex flex-col items-start">
+                    <img src="/not-found.gif" className="w-[200px]" alt="" />
+                    <h1 className="text-xl w-full text-center  font-bold text-gray-800">
+                      No projects in {project} category
+                    </h1>
+                    <Link
+                      to="/projects"
+                      className="bg-primary text-center p-3 rounded-lg font-semibold text-white mt-4"
+                    >
+                      View other Project categories
+                    </Link>
+                  </div>
+                </div>
               )}
+
+              <Link
+                to="/projects"
+                className="bg-primary max-w-[300px] text-center p-3 rounded-lg font-semibold text-white mt-4"
+              >
+                View other Project categories
+              </Link>
             </div>
           )}
         </div>
