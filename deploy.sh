@@ -3,7 +3,6 @@
 : '---- CONSTANTS ----'
 COMPOSE_FILE="docker-compose.dev.yaml"
 CONTAINER_PREFIX="ihub-"
-REMOTE_URL="git@github.com:Mmust-Ihub/Ihub.git"
 BRANCH="main"
 IHUB_PATH=~/NEW-IHUB/Ihub
 
