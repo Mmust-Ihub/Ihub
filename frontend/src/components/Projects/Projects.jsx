@@ -6,7 +6,7 @@ import { FaHandHoldingMedical } from "react-icons/fa6";
 import { FaCloudSunRain } from "react-icons/fa6";
 import { SiHiveBlockchain } from "react-icons/si";
 import { GiBrain } from "react-icons/gi";
-import { IoGameController } from "react-icons/io5";
+import { AiFillApi } from "react-icons/ai";
 import FocusCard from './FocusCard';
 
 const FocusArea = [
@@ -18,7 +18,7 @@ const FocusArea = [
   {
     icon: GiTeacher,
     title: "Edtech",
-    link: "/projects/edtech",
+    link: "/projects/edutech",
   },
   {
     icon: PiPlantBold,
@@ -46,9 +46,9 @@ const FocusArea = [
     link: "/projects/ai-ml",
   },
   {
-    icon: IoGameController,
-    title: "Gaming",
-    link: "/projects/gaming",
+    icon: AiFillApi,
+    title: "iot",
+    link: "/projects/iot",
   },
 ];
 

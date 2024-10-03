@@ -5,12 +5,11 @@ import "react-toastify/dist/ReactToastify.css";
 const CreateProject = () => {
   const [project, setProject] = useState({
     title: "",
-    headline: "",
     description: "",
-    category: "",
+    categories: [],
     image: null,
   });
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,18 +26,40 @@ const CreateProject = () => {
     });
   };
 
+  const handleCategoryChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setProject((prevProject) => ({
+        ...prevProject,
+        categories: [...prevProject.categories, value],
+      }));
+      console.log(project.categories);
+    } else {
+      setProject((prevProject) => ({
+        ...prevProject,
+        categories: prevProject.categories.filter(
+          (category) => category !== value
+        ),
+      }));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setLoading(true); // Set loading to true
-    toast.info("Creating project...");
+    setLoading(true);
+    toast.loading("Creating project...");
 
     const formData = new FormData();
     formData.append("title", project.title);
-    formData.append("headline", project.headline);
     formData.append("description", project.description);
-    formData.append("category", project.category);
-    formData.append("image", project.image);
+    project.categories.forEach((category) =>
+      formData.append("category[]", category)
+    );
+
+    if (project.image) {
+      formData.append("image", project.image);
+    }
 
     try {
       const response = await fetch(
@@ -57,23 +78,25 @@ const CreateProject = () => {
       }
 
       const result = await response.json();
+      toast.dismiss();
       toast.success("Project created successfully!");
-      
-      window.location.href = "/projects";
+      window.location.reload();
+      // window.location.href = "/projects";
     } catch (error) {
+      toast.dismiss()
       toast.error("There was a problem with the submission.");
       console.error("There was a problem with the fetch operation:", error);
     } finally {
-      setLoading(false); // Set loading back to false
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center">
       <ToastContainer />
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
+      <div className="bg-slate-100 p-8 rounded-lg shadow-md w-full max-w-2xl">
         <h2 className="text-2xl font-bold mb-6 text-center">Create Project</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4  p-4 ">
           {/* Title */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
@@ -84,24 +107,8 @@ const CreateProject = () => {
               name="title"
               value={project.title}
               onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="h-12 p-2 rounded-md outline-none w-full mb-3"
               placeholder="Enter project title"
-              required
-            />
-          </div>
-
-          {/* Headline */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Headline
-            </label>
-            <input
-              type="text"
-              name="headline"
-              value={project.headline}
-              onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              placeholder="Enter brief project description"
               required
             />
           </div>
@@ -114,35 +121,44 @@ const CreateProject = () => {
               name="description"
               value={project.description}
               onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="h-32 p-2 rounded-md outline-none w-full mb-3"
               placeholder="Enter project details"
               required
             />
           </div>
 
-          {/* Category */}
+          {/* Categories */}
           <div>
-            <label className="block p-4 font-medium text-gray-700">
-              Category
+            <label className="block text-sm font-medium text-gray-700">
+              Categories
             </label>
-            <select
-              name="category"
-              value={project.category}
-              onChange={handleChange}
-              className="mt-1 block p-2  w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 "
-              required
-            >
-              <option value="fintech">Fin tech</option>
-              <option value="edtech">Ed Tech</option>
-              <option value="agritech">Agri Tech</option>
-              <option value="healthtech">Health Tech</option>
-              <option value="ai-ml">AI / ML</option>
-              <option value="iot">IoT</option>
-            </select>
+            <div className="flex flex-wrap gap-4 ">
+              {/* Category checkboxes */}
+              {[
+                "fintech",
+                "edutech",
+                "agritech",
+                "healthtech",
+                "ai-ml",
+                "iot",
+                "blockchain",
+                "Climate Tech",
+              ].map((category) => (
+                <label key={category} className="inline-flex items-center">
+                  <input
+                    type="checkbox"
+                    value={category}
+                    onChange={handleCategoryChange}
+                    className="form-checkbox"
+                  />
+                  <span className="ml-2 capitalize">{category}</span>
+                </label>
+              ))}
+            </div>
           </div>
 
           {/* Image */}
-          <div>
+          <div className="py-4">
             <label className="block text-sm font-medium text-gray-700">
               Project Image
             </label>
@@ -158,7 +174,7 @@ const CreateProject = () => {
           {/* Submit Button */}
           <div>
             <button
-              disabled={loading} // Disable the button when loading
+              disabled={loading}
               className={`w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                 loading ? "opacity-50 cursor-not-allowed" : ""
               }`}
