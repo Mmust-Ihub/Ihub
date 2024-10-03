@@ -20,7 +20,7 @@ function PrevEvents() {
         `${import.meta.env.VITE_BACKEND_URL}/events/past`
       );
       const data = await response.json();
-      console.log(data);
+      
       if (!response.ok) {
         Errnotify("Failed to fetch previous events");
         return;
