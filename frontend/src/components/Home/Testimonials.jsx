@@ -85,22 +85,22 @@ function Testimonials() {
               key={index}
               className="shadow-3xl shadow-black overflow-ellipsis justify-center items-center flex text-black p-1"
             >
-              <div className="bg-white  h-[220px] px-6 py-4 rounded-2xl flex flex-row items-start justify-start space-x-4 mx-2 ">
-                <div className="w-[200px] overflow-clip">
+              <div className="bg-white  h-[220px] gap-2 px-2 py-2 rounded-2xl flex flex-row items-start justify-start space-x-2 mx-2 overflow-clip">
+                <div className="">
                   <img
                     src={testimonial.imageUrl}
                     alt="person image"
-                    className="rounded-full object-cover w-[70px] h-[70px]"
+                    className="rounded-full object-cover w-[50px] h-[50px] object-top"
                   />
                 </div>
-                <div>
+                <div className="w-full flex-1">
                   <span className="w-full text-black  font-semibold">
                     {testimonial.name}
                   </span>
                   <span className="font-semibold w-full italic text-black ">
                     , {testimonial.occupation}
                   </span>
-                  <p className="p-4 ">{testimonial.message}</p>
+                  <p className="p-4 w-full">{testimonial.message}</p>
                 </div>
               </div>
             </div>
