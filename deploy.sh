@@ -34,11 +34,12 @@ function check_docker_is_running(){
 function stop_running_containers() {
     echo "Stopping the running containers ..."
 
-    docker ps -a --format '{{.Names}}' | grep "^${CONTAINER_PREFIX}" | xargs -r docker stop
-
-    # remove all the stopped containers
-    docker ps -a --format '{{.Names}}' | grep "^${CONTAINER_PREFIX}" | xargs -r docker rm
-    echo "removed the old containers ..."
+    # docker ps -a --format '{{.Names}}' | grep "^${CONTAINER_PREFIX}" | xargs -r docker stop
+    # # remove all the stopped containers
+    # docker ps -a --format '{{.Names}}' | grep "^${CONTAINER_PREFIX}" | xargs -r docker rm
+    docker compose -f $COMPOSE_FILE down
+    docker image prune -f
+    echo "removed the old containers and daggling images ...."
 }
 
 function deploy() {
@@ -55,8 +56,8 @@ function deploy() {
 }
 
 function main() {
-    change_path
-    pull_latest_changes
+    # change_path
+    # pull_latest_changes
     check_docker_is_running
     stop_running_containers
     deploy
