@@ -1,7 +1,7 @@
 import React from "react";
 import { HashLink } from "react-router-hash-link";
 import { Link, NavLink } from "react-router-dom";
-import {FaGithub, FaFacebook } from "react-icons/fa";
+import { FaGithub, FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import LogoImg from "../../assets/webp/logo1.webp";
 import SubscribePopUp from "../Home/SubscribePopUp";
@@ -22,11 +22,14 @@ function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-4">
             <div>
-              <img
-                src={LogoImg}
-                alt="mmust ihub logo image"
-                className="mt-[-50px] sm:w-36 sm:h-36 object-contain  w-28 h-28"
-              />
+              <a href="/">
+                {" "}
+                <img
+                  src={LogoImg}
+                  alt="mmust ihub logo image"
+                  className="mt-[-50px] sm:w-36 sm:h-36 object-contain  w-28 h-28"
+                />
+              </a>
               <h3 className="text-xl font-semibold mb-6">Contact Info</h3>
               <ul className="space-y-4">
                 <li className="flex items-center space-x-2">
@@ -85,9 +88,7 @@ function Footer() {
                     <line x1="6" x2="7" y1="10" y2="10"></line>
                   </svg>
                   <span className="truncate">
-                    <a href={`mailto:info@ihub.mmust.ac.ke`}>
-                      info@ihub.mmust.ac.ke
-                    </a>
+                    <a href={`mailto:ihub@mmust.ac.ke`}>ihub@mmust.ac.ke</a>
                   </span>
                 </li>
               </ul>
@@ -167,7 +168,7 @@ function Footer() {
             <div>
               <h3 className="text-xl font-semibold mb-6">Social Links</h3>
               <div className="flex flex-row items-center text-center gap-6 text-tersiary">
-                <a href="#">
+                <a href="#" target="_blank">
                   <p>
                     {" "}
                     <FaXTwitter className="hover:scale-125 h-[28px] w-[28px] transition-all duration-100 ease-in-out" />
@@ -179,7 +180,10 @@ function Footer() {
                     <FaGithub className="hover:scale-125 h-[28px] w-[28px] transition-all duration-100 ease-in-out" />
                   </p>
                 </a>
-                <a href="#">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61566790980197"
+                  target="_blank"
+                >
                   <p>
                     {" "}
                     <FaFacebook className="hover:scale-125 h-[28px] w-[28px] transition-all duration-100 ease-in-out" />
