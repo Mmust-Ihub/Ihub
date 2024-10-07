@@ -4,7 +4,6 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     image: backend
-    container_name: ihub-backend
     env_file:
       - path: ./backend/.env.prod
         required: true
