@@ -34,7 +34,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/admin/*" element={<Admin />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/signup" element={<SignUp />} />
+        {/* <Route path="/signup" element={<SignUp />} /> */}
         <Route path="/login" element={<LoginForm />} />
         <Route path="/projects/:project" element={<FocusProjects />} />
         <Route path="*" element={<NotFoundPage />} />
