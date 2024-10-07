@@ -168,7 +168,10 @@ function Footer() {
             <div>
               <h3 className="text-xl font-semibold mb-6">Social Links</h3>
               <div className="flex flex-row items-center text-center gap-6 text-tersiary">
-                <a href="#" target="_blank">
+                <a
+                  href="https://x.com/mmustihub?t=GADtVncH6OHulzgYNOfULQ&s=09"
+                  target="_blank"
+                >
                   <p>
                     {" "}
                     <FaXTwitter className="hover:scale-125 h-[28px] w-[28px] transition-all duration-100 ease-in-out" />
