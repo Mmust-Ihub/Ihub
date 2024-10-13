@@ -16,7 +16,7 @@ const CreateEvents = () => {
   const [loading, setLoading] = useState(false);
   const notify = (message) => toast.success(message);
   const errNotify = (message) => toast.error(message);
-  const [isStartDate, setIsStartDate] = useState(false); 
+  const [isStartDate, setIsStartDate] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,12 +40,14 @@ const CreateEvents = () => {
     form.append("end_date", formData.end_date);
     form.append("event_link", formData.event_link);
     form.append("image", formData.image);
+
+    // Ensure tags are handled as an array
     formData.tags.split(",").forEach((tag) => {
-      form.append("tags[]", tag.trim()); // Trim to remove extra spaces
+      form.append("tags", tag.trim());
     });
 
     try {
-      notify("Loading");
+      // notify("Loading");
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/events`,
         {
@@ -58,16 +60,39 @@ const CreateEvents = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to create event");
+        const errorData = await response.json();
+        console.error("Server responded with error:", errorData);
+        throw new Error(`Failed to create event: ${errorData.message}`);
       }
 
-      const data = await response.json();
-      notify("Event created successfully!");
+      if (response.ok) {
+        notify("Event created successfully");
+        setFormData({
+          title: "",
+          short_description: "",
+          long_description: "",
+          start_date: "",
+          end_date: "",
+          tags: "",
+          event_link: "",
+          image: null,
+        });
+      }
     } catch (error) {
-      errNotify("An error occured. Try again");
+      errNotify("An error occurred. Try again");
       console.error("Error creating event:", error);
     } finally {
       setLoading(false);
+      setFormData({
+        title: "",
+        short_description: "",
+        long_description: "",
+        start_date: "",
+        end_date: "",
+        tags: "",
+        event_link: "",
+        image: null,
+      });
     }
   };
 
@@ -108,6 +133,7 @@ const CreateEvents = () => {
             <textarea
               id="short_description"
               name="short_description"
+              minLength={10}
               value={formData.short_description}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"

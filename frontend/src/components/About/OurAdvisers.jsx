@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import img1 from "../../assets/simiyu.jpg";
 import img2 from "../../assets/rambim.jpg";
 import img3 from "../../assets/download.jpeg";
+import im4 from "../../assets/about/drsum.jpeg";
 
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
@@ -11,6 +12,17 @@ function OurTeam() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const advisersData = [
+    {
+      name: "Dr. Tecla Sum Psusma",
+      img: im4,
+      role: "",
+      biosource:
+        "https://mmust.ac.ke/staffprofiles/index.php/dr-tecla-sum-psusma",
+      bio: "Dr. Tecla Sum is the Director,Science Park Innovation and Incubation Centre (SPIIC) and former Chairperson of the Paramedical Sciences Department, with over 9 years in teaching and clinical experience. She is currently pursuing Post-doctoral studies in Emergency Medicine & Trauma Systems Management at Rutgers University, USA.  She holds a PhD Med. Edu, Moi University with a Master of Science Degree in Emergency Train System from Lingoping University, Sweden and a Master of Science degree in Nursing (Maternal and Neonatal Health), Moi University.  Dr Sum is also a holder of Bachelor of Science in Nursing from University of Eastern Africa Baraton.Dr.Sum is Kenya’s representative in United Nations Economic Commission for Africa(UNECA) and a member of Patent Draft Chapter, Emergency and Trauma Medicine Education and Training Association following her breakthrough discovery and outstanding innovation of a cloud based contact tracing application tool(eKonnect).She spearheaded the establishment of Bachelor of Science in Paramedical Science qualifying MMUST to be the maiden university to offer this program in Africa.Dr. Sum is MMUST's Covid response deputy chairperson and also serves as the County Technical Emergency response expert in Kakamega County.  Given her vast knowledge and experience in research and innovation, she has attracted several research grants ,having served as a board Member, Directorate of Science Park Innovation and Incubation Centre (SPIIC).Her Goal is to Preserve life, Promote Recovery and Preventing complications and Disabilities. ",
+      linkedin:
+        "https://www.linkedin.com/search/results/all/?keywords=dr%20sum%20tecla%20&origin=GLOBAL_SEARCH_HEADER&sid=%3A8L",
+      twitter: "",
+    },
     {
       name: "Dr. Dorothy Rambim",
       img: img2,
