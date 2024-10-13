@@ -14,9 +14,9 @@ import Donate from "./pages/DonatePage";
 import CommunityAndEvents from "./pages/CommunityAndEvents";
 import NotFoundPage from "./pages/NotFoundPage";
 import Contact from "./pages/Contact";
-import Admin from "./pages/Admin"; 
+import Admin from "./pages/Admin";
 import ForgotPassword from "./pages/admin/ForgotPassword";
-import SignUp from "./pages/admin/SignUp";
+
 import LoginForm from "./pages/admin/Login";
 import FocusProjects from "./pages/FocusProjects";
 
@@ -42,7 +42,5 @@ function App() {
     </Router>
   );
 }
-
-
 
 export default App;
