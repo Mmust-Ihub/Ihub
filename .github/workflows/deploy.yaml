@@ -2,11 +2,11 @@ name: Ihub
 run-name: Deploy
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-      - "v1.*"
+  # push:
+  #   branches:
+  #     - main
+  #   tags:
+  #     - "v1.*"
   pull_request:
     branches: ["main"]
     types:
