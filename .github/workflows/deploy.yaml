@@ -69,10 +69,9 @@ jobs:
   Deploy:
     name: deploy to production
     needs: [Build]
-    # runs-on:
-    #   - self-hosted
-    #   - ihub
-    runs-on: ubuntu-latest
+    runs-on:
+      - self-hosted
+      - ihub
 
     steps:
       - name: checkout the repo
@@ -83,7 +82,7 @@ jobs:
         run: |
           chmod +x ./deploy.sh
 
-      # - name: deploy latest updates
-      #   shell: bash
-      #   run: |
-      #     ./deploy.sh
+      - name: deploy latest updates
+        shell: bash
+        run: |
+          ./deploy.sh
