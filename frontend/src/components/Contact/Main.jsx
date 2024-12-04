@@ -71,9 +71,7 @@ function Main() {
                 <line x1="6" x2="7" y1="10" y2="10"></line>
               </svg>
               <span className="truncate">
-                <a href={`mailto:info@ihub.mmust.ac.ke`}>
-                  info@ihub.mmust.ac.ke
-                </a>
+                <a href={`mailto:ihub@mmust.ac.ke`}>ihub@mmust.ac.ke</a>
               </span>
             </li>
           </ul>

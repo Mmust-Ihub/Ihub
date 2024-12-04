@@ -10,10 +10,9 @@ const useAuthToken = () => {
     const token = localStorage.getItem("authToken");
     return { token, setAuthToken };
   };
-  
+
   // Function to update the authentication token
   const updateAuthToken = (newToken) => {
-    
     setAuthToken(newToken);
 
     // Store the token in local storage for persistence
@@ -29,7 +28,7 @@ const useAuthToken = () => {
   };
 
   // Return the token and functions to update and clear it
-  return { updateAuthToken, clearAuthToken, getItem};
+  return { updateAuthToken, clearAuthToken, getItem };
 };
 
 export default useAuthToken;

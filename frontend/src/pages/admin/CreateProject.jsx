@@ -142,7 +142,7 @@ const CreateProject = () => {
                 "ai-ml",
                 "iot",
                 "blockchain",
-                "Climate Tech",
+                "climatetech",
               ].map((category) => (
                 <label key={category} className="inline-flex items-center">
                   <input

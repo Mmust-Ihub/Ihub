@@ -41,7 +41,7 @@ const Header = ({ setShowSidebar }) => {
             {/*desktop navlinks */}
             <div className="hidden   ml-20 lg:block">
               <ul className="flex items-center gap-8">
-                <li className="relative group cursor-pointer hover:animate-bounce">
+                <li className="relative group cursor-pointer ">
                   <NavLink
                     to={"/about"}
                     className={`${pathname == "/about" && "activeLink"} h-full`}
@@ -49,7 +49,7 @@ const Header = ({ setShowSidebar }) => {
                     About
                   </NavLink>
                 </li>
-                <li className="relative hover:animate-bounce group cursor-pointer">
+                <li className="relative  group cursor-pointer">
                   <NavLink
                     to={"/programs"}
                     className={`${pathname == "/programs" && "activeLink"}`}
@@ -57,7 +57,7 @@ const Header = ({ setShowSidebar }) => {
                     Programs
                   </NavLink>
                 </li>
-                <li className="hover:animate-bounce">
+                <li className="">
                   <NavLink
                     className={`${pathname == "/projects" && "activeLink"}`}
                     activeclassname="active"
@@ -67,7 +67,7 @@ const Header = ({ setShowSidebar }) => {
                     Projects
                   </NavLink>
                 </li>
-                <li className="hover:animate-bounce">
+                <li className="">
                   <NavLink
                     className={`${pathname == "/membership" && "activeLink"}`}
                     activeclassname="active"
@@ -78,7 +78,7 @@ const Header = ({ setShowSidebar }) => {
                   </NavLink>
                 </li>
 
-                <li className="hover:animate-bounce">
+                <li className="">
                   <NavLink
                     className={`${
                       pathname == "/communityandevents" && "activeLink"
@@ -90,7 +90,7 @@ const Header = ({ setShowSidebar }) => {
                     Community & Events
                   </NavLink>
                 </li>
-                <li className="hover:animate-bounce">
+                <li className="">
                   <NavLink
                     to="/contact"
                     className={`${pathname == "/contact" && "activeLink"}`}
