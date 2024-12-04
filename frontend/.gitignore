@@ -16,7 +16,8 @@ dist-ssr
 .env.*
 .env.local
 .env.development.local
-nginx/
+nginx/nginx.conf
+nginx/test.nginx.conf
 ssl/
 google862f4343f43f8a40.html
 
