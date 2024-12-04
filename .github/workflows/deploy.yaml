@@ -23,11 +23,11 @@ on:
 env:
   CLIENT_FILE: dev.Dockerfile
   CLIENT_IMAGE: ihub-client
-  CLIENT_CONTEXT: ./frontend
+  CLIENT_CONTEXT: frontend
 
   SERVER_FILE: dev.Dockerfile
   SERVER_IMAGE: ihub-server
-  SERVER_CONTEXT: ./backend
+  SERVER_CONTEXT: backend
 
 
 jobs:
@@ -53,7 +53,7 @@ jobs:
       - name: build and push client image to registry
         uses: docker/build-push-action@v6
         with:
-          context: ${{env.CLIENT_CONTEXT}}
+          context: "{{defaultContext}}:${{env.CLIENT_CONTEXT}}"
           file: ${{env.CLIENT_FILE}}
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/${{env.CLIENT_IMAGE}}
@@ -61,7 +61,7 @@ jobs:
       - name: build and push server image to registry
         uses: docker/build-push-action@v6
         with:
-          context: ${{env.SERVER_CONTEXT}}
+          context: "{{defaultContext}}:${{env.SERVER_CONTEXT}}"
           file: ${{env.SERVER_FILE}}
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/${{env.SERVER_IMAGE}}
