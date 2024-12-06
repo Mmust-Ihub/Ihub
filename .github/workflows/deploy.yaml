@@ -57,7 +57,7 @@ jobs:
 
       - name: build and push client image to registry
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{env.CLIENT_IMAGE}}
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{env.CLIENT_IMAGE}} -f ${{env.CLIENT_FILE}} .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{env.CLIENT_IMAGE}}
 
   build_server:
