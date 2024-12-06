@@ -1,9 +1,7 @@
 services:
   backend:
-    build:
-      context: ./backend
-      dockerfile: dev.Dockerfile
-    image: backend
+    image: banditantony9/ihub-server:latest
+    pull_policy: always
     env_file:
       - path: ./backend/.env
         required: true
@@ -30,10 +28,8 @@ services:
     tty: true
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: dev.Dockerfile
-    image: frontend
+    image: banditantony9/ihub-client:latest
+    pull_policy: always
     container_name: ihub-frontend
     restart: always
     ports:
