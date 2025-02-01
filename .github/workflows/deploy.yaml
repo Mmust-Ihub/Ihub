@@ -2,11 +2,11 @@ name: Ihub
 run-name: Deploy
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-      - "v1.*"
+  # push:
+  #   branches:
+  #     - main
+  #   tags:
+  #     - "v1.*"
   pull_request:
     branches: ["main"]
     types:
@@ -20,8 +20,76 @@ on:
         required: false
         default: "testing"
 
+env:
+  CLIENT_FILE: dev.Dockerfile
+  CLIENT_IMAGE: ihub-client:latest
+  CLIENT_CONTEXT: frontend
+
+  SERVER_FILE: dev.Dockerfile
+  SERVER_IMAGE: ihub-server
+  SERVER_CONTEXT: backend
+
 jobs:
+  build_client:
+    name: "build and push image"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./${{env.CLIENT_CONTEXT}}
+    steps:
+      - name: checkout the repository
+        uses: actions/checkout@v4
+
+      - name: create env file
+        env:
+          VITE_BACKEND_URL: ${{secrets.VITE_BACKEND_URL}}
+          NODE_ENV: production
+        run: |
+          chmod u+x ./setup_env.sh
+          ./setup_env.sh
+
+      - name: login to docker registry
+        uses: docker/login-action@v3
+        with:
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_PASSWORD}}
+
+      - name: build and push client image to registry
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{env.CLIENT_IMAGE}} -f ${{env.CLIENT_FILE}} .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{env.CLIENT_IMAGE}}
+
+  build_server:
+    name: "build and push server"
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the repository
+        uses: actions/checkout@v4
+
+      - name: login to docker registry
+        uses: docker/login-action@v3
+        with:
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_PASSWORD}}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: build and push server image to registry
+        uses: docker/build-push-action@v6
+        with:
+          context: "{{defaultContext}}:${{env.SERVER_CONTEXT}}"
+          file: ${{env.SERVER_FILE}}
+          push: true
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/${{env.SERVER_IMAGE}}
+
   Deploy:
+    name: deploy to production
+    needs: [build_server, build_client]
     runs-on:
       - self-hosted
       - ihub
