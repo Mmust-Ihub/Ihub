@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import img1 from "../../assets/simiyu.jpg";
 import img2 from "../../assets/rambim.jpg";
-import img3 from "../../assets/download.jpeg";
 import im4 from "../../assets/about/drsum.jpeg";
 
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
@@ -44,16 +43,16 @@ function OurTeam() {
         "https://www.linkedin.com/in/prestonesimiyu/?originalSubdomain=ke",
       twitter: "",
     },
-    {
-      name: "Elvis Amiani",
-      img: img3,
-      role: "",
-      biosource: "https://www.linkedin.com/in/amiani-liuva-469362218/",
-      bio: "My diverse experiences as a teacher and programmer, along with my internship in Health IT and leadership as IEEE MMUST Chair, have equipped me with valuable insights. I’m excited to apply my knowledge to foster growth and collaboration. As a staff member at MMUST iHub, I’m dedicated to creating impactful initiatives that inspire and empower our community.",
-      github: "https://github.com/Amianie/",
-      linkedin: "https://www.linkedin.com/in/amiani-liuva-469362218/",
-      twitter: "https://x.com/amiani_liuva",
-    },
+    // {
+    //   name: "Elvis Amiani",
+    //   img: img3,
+    //   role: "",
+    //   biosource: "https://www.linkedin.com/in/amiani-liuva-469362218/",
+    //   bio: "My diverse experiences as a teacher and programmer, along with my internship in Health IT and leadership as IEEE MMUST Chair, have equipped me with valuable insights. I’m excited to apply my knowledge to foster growth and collaboration. As a staff member at MMUST iHub, I’m dedicated to creating impactful initiatives that inspire and empower our community.",
+    //   github: "https://github.com/Amianie/",
+    //   linkedin: "https://www.linkedin.com/in/amiani-liuva-469362218/",
+    //   twitter: "https://x.com/amiani_liuva",
+    // },
   ];
 
   const openModal = (member) => {
