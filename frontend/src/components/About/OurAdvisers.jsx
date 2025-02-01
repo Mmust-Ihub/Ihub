@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import img1 from "../../assets/simiyu.jpg";
 import img2 from "../../assets/rambim.jpg";
-import img3 from "../../assets/download.jpeg";
 import im4 from "../../assets/about/drsum.jpeg";
 
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";

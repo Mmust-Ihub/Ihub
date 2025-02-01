@@ -1,2 +1,2 @@
 # Ihub
-The mmust ihub web application
+The mmust ihub responsive web application
