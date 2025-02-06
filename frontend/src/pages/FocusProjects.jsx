@@ -72,8 +72,8 @@ const FocusProjects = () => {
       <Header />
       <ToastContainer />
       <div className="w-screen  px-4 mb-44 pt-24 md:px-16 lg:px-40">
-        <h2 className="text-secondary w-full font-bold text-2xl mt-8 mb-4">
-          {project} Projects
+        <h2 className="text-secondary w-full font-bold text-2xl mt-8 mb-4 capitalize">
+          {project === 'iot'? 'IoT': project} Projects
         </h2>
         <div>
           {loading ? (
