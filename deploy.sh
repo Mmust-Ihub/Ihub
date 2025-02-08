@@ -39,7 +39,8 @@ function stop_running_containers() {
     # docker ps -a --format '{{.Names}}' | grep "^${CONTAINER_PREFIX}" | xargs -r docker rm
     docker compose -f $COMPOSE_FILE down
     docker image prune -f
-    echo "removed the old containers and daggling images ...."
+    docker volume prune -f
+    echo "removed the old containers, daggling images and orphan volumes ...."
 }
 
 function deploy() {

@@ -82,4 +82,4 @@ volumes:
 
 networks:
   ihub:
-    driver: bridge
+    external: true
