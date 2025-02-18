@@ -1,0 +1,83 @@
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - '--web.enable-lifecycle' # To reload confurations. make sure to curl the endpoint on changes.
+      - '--config.file=/etc/prometheus/prometheus.yaml'
+    volumes:
+      - ./monitoring/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      # - ./prometheus/rules:/etc/prometheus/rules
+      - prometheus-data:/prometheus
+    depends_on:
+      - cadvisor
+      # - alertmanager
+    networks:
+      - ihub
+    restart: always
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    expose:
+      - 8080
+    volumes:
+      - /:/rootfs:ro        # Access to the root filesystem
+      - /var/run:/var/run:rw # Access to Docker runtime
+      - /sys:/sys:ro         # Access to system metrics
+      - /var/lib/docker/:/var/lib/docker:ro # Access to docker's metadata
+    depends_on:
+      - redis
+    networks:
+      - ihub
+    restart: always
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    expose:
+      - 6379
+    networks:
+      - ihub
+
+  # alertmanager:
+  #   image: prom/alertmanager:latest
+  #   container_name: alertmanager
+  #   ports:
+  #     - "9093:9093"
+  #   command: "--config.file=/alertmanager.yaml --log.level=debug"
+  #   volumes:
+  #     - ./alertmanager/alertmanager.yaml:/alertmanager.yaml
+  #   networks:
+  #     - ihub
+  #   restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    expose:
+      - 3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    environment:
+      GF_SERVER_ROOT_URL: https://ihub.mmust.ac.ke/metrics/
+      GF_SERVER_SERVE_FROM_SUB_PATH: true
+      GF_USERS_ALLOW_SIGN_UP: false
+    depends_on:
+      - prometheus
+    networks:
+      - ihub
+    restart: unless-stopped
+
+networks:
+  ihub:
+    external: true
+
+volumes:
+  grafana-data: {}
+  prometheus-data: {}

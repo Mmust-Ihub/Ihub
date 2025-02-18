@@ -2,6 +2,7 @@
 
 : '---- CONSTANTS ----'
 COMPOSE_FILE="docker-compose.dev.yaml"
+MONITORING_FILE="monitoring.yaml"
 CONTAINER_PREFIX="ihub-"
 BRANCH="main"
 IHUB_PATH=~/NEW-IHUB/Ihub
@@ -56,10 +57,28 @@ function deploy() {
 
 }
 
+function reload_prometheus() {
+    local url="https://41.89.195.106:9090"
+    echo "🩺 Reloading prometheus configurations."
+
+    for _ in {1..20}; do
+      if curl --silent --fail "$url"; then
+        echo "✅ Prometheus configuration reloaded successfully!"
+        return 0
+      fi
+      echo "👋️ Still waiting for connection."
+      sleep 1
+    done
+}
+
 function main() {
     change_path
     pull_latest_changes
     check_docker_is_running
+    # start the monitoring services
+    docker compose -f "$MONITORING_FILE" up -d --build
+    reload_prometheus
+    docker image prune -f; docker volume prune -f  # Remove all dangling images and volumes
     stop_running_containers
     deploy
 }
