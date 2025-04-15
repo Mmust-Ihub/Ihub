@@ -11,19 +11,24 @@ import FocusCard from './FocusCard';
 
 const FocusArea = [
   {
-    icon: GrMoney,
-    title: "Fintech",
-    link: "/projects/fintech",
+    icon: PiPlantBold,
+    title: "AgriTech",
+    link: "/projects/agritech",
+  },
+  {
+    icon: AiFillApi,
+    title: "iot",
+    link: "/projects/iot",
+  },
+    {
+    icon: GiBrain,
+    title: "AI/ML",
+    link: "/projects/ai-ml",
   },
   {
     icon: GiTeacher,
     title: "Edtech",
     link: "/projects/edutech",
-  },
-  {
-    icon: PiPlantBold,
-    title: "AgriTech",
-    link: "/projects/agritech",
   },
   {
     icon: FaHandHoldingMedical,
@@ -40,16 +45,11 @@ const FocusArea = [
     title: "Blockchain",
     link: "/projects/blockchain",
   },
-  {
-    icon: GiBrain,
-    title: "AI/ML",
-    link: "/projects/ai-ml",
-  },
-  {
-    icon: AiFillApi,
-    title: "iot",
-    link: "/projects/iot",
-  },
+   {
+    icon: GrMoney,
+    title: "Fintech",
+    link: "/projects/fintech",
+  }
 ];
 
 function Projects() {
