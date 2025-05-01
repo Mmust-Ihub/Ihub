@@ -17,7 +17,7 @@ const FocusArea = [
   },
   {
     icon: AiFillApi,
-    title: "iot",
+    title: "IoT",
     link: "/projects/iot",
   },
     {
@@ -27,7 +27,7 @@ const FocusArea = [
   },
   {
     icon: GiTeacher,
-    title: "Edtech",
+    title: "Edutech",
     link: "/projects/edutech",
   },
   {
