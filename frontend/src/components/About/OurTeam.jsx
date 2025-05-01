@@ -17,7 +17,7 @@ function OurTeam() {
       img: img3,
 
       role: "Team Lead || Backend & DevOps Engineer",
-      portfolio: "",
+      portfolio: "https://antony-kariuki.vercel.app/",
       github: "https://github.com/KariukiAntony",
       linkedin: "https://www.linkedin.com/in/antonygichoya/",
       twitter: "https://x.com/gichoya_antony",
@@ -73,7 +73,7 @@ function OurTeam() {
       name: "Sebastian Chanzu",
       img: img6,
       role: "Digital Marketing Lead || Data Scientist",
-      portfolio: "",
+      portfolio: "https://chanzu.vercel.app/",
       github: "https://github.com/SebbieMzingKe",
       linkedin: "https://www.linkedin.com/in/sebbie-evayo-3249a9250/",
       twitter: "https://x.com/sebbiemzing",
