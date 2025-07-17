@@ -1,0 +1,25 @@
+name: Ihub
+run-name: Restore server
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Deploy:
+    name: Restore server
+    runs-on:
+      - self-hosted
+      - ihub
+    steps:
+      - name: checkout the repo
+        uses: actions/checkout@v4
+
+      - name: change file permissions
+        shell: bash
+        run: |
+          chmod +x ./scripts/restore.sh
+
+      - name: deploy latest updates
+        shell: bash
+        run: |
+          ./scripts/restore.sh
